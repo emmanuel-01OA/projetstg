@@ -5,7 +5,7 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href="{{ route('dashboard') }}"><img class="logo-icon -me-5" src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"><span class="logo-text">SGABS</span></a>
+		            <a class="app-logo" href="{{ route('dashboard') }}"><img class="logo-icon" src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"></a>
 
 		        </div><!--//app-branding-->
 
@@ -13,7 +13,7 @@
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
 					    <li class="nav-item">
 
-					        <a class="nav-link active" href="{{ route('dashboard') }}">
+					        <a class="nav-link" href="{{ route('dashboard') }}">
 						        <span class="nav-icon">
 						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 		  <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
@@ -99,7 +99,7 @@
                    <ul class="submenu-list list-unstyled">
                        <li class="submenu-item"><a class="submenu-link" href="{{ route('statutpers.allstatut') }}">Liste des status</a></li>
                        <li class="submenu-item"><a class="submenu-link" href="account.html">modifier</a></li>
-                       <li class="submenu-item"><a class="submenu-link" href="settings.html">Ajouter statut</a></li>
+                       <li class="submenu-item"><a class="submenu-link" href="{{ route('statutpers.create') }}">Ajouter statut</a></li>
                    </ul>
                </div>
            </li><!--//nav-item-->
@@ -126,7 +126,7 @@
 					        </a><!--//nav-link-->
 					        <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
 						        <ul class="submenu-list list-unstyled">
-							        <li class="submenu-item"><a class="submenu-link" href="notifications.html">Liste des activites</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="">Liste des activites</a></li>
 							        <li class="submenu-item"><a class="submenu-link" href="account.html">modifier activites</a></li>
 							        <li class="submenu-item"><a class="submenu-link" href="settings.html">Ajouter activite</a></li>
 						        </ul>

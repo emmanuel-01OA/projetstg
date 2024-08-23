@@ -1,12 +1,12 @@
-
-@extends('layouts.template')
+@extends('layouts.collaborateur.template')
 
 @section('content')
 
 
+
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0">AJOUT DU PERSONNEL </h1>
+        <h1 class="app-page-title mb-0">PLANIFICATION DE CONGÉS</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">
@@ -75,10 +75,6 @@
 
 
 </div><!--//container-fluid-->
-
-
-
-
 
 
 @endsection

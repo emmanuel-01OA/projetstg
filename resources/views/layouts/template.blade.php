@@ -12,11 +12,23 @@
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
 
+    <!-- configurer taiwind CSS -->
+    @vite('resources/css/app.css')
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
+
+    {{-- mode nuit  --}}
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
 
 </head>
 
@@ -64,6 +76,16 @@
 
     <!-- Page Specific JS -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+
+
+    <script>
+        function openEditModal(task) {
+            this.openModal = false;
+            this.openEditModal = true;
+            this.task = task;
+        }
+    </script>
 
 </body>
 </html>

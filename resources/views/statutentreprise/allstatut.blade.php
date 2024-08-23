@@ -26,17 +26,22 @@
                 </div><!--//col-->
                 <div class="col-auto">
 
-                    <select class="form-select w-auto" >
+                    {{-- <select class="form-select w-auto" >
                           <option selected value="option-1">Statut personnel</option>
                           <option value="orders-paid-tab" id="orders-paid-tab" >Statut inactif</option>
-                    </select>
+                    </select> --}}
                 </div>
+
+
+
+
+
                 <div class="col-auto">
 
 
 
 
-                    <a class="btn btn-danger" href="#" style="color: beige"> Ajouter Statut</a>
+                    <button class="btn btn-danger"  href="" style="color: beige"> Ajouter Statut</button>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -49,16 +54,14 @@
     <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">statut personnel inactif</a>
 
 </nav>
-
-
-
-
-
+{{--  --}}
 
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">
             <div class="app-card-body">
+
+
                 <div class="table-responsive">
                     <table class="table app-table-hover mb-0 text-left">
                         <thead>
@@ -68,6 +71,9 @@
                                 <th class="cell" colspan="50"></th>
                                 <th class="cell">Libell&eacute; statut personnel</th>
                                 <th class="cell" colspan="20">Etat</th>
+                                <th class="cell" colspan="20">Action</th>
+
+
 
                             </tr>
                         </thead>
@@ -90,6 +96,12 @@
 
                                 <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
+
+                                <th class="cell" colspan="20">
+
+
+                                </th>
+
 
                             </tr>
 
@@ -181,6 +193,8 @@
 
 
 </div><!--//tab-content-->
+
+
 
 
 

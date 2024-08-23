@@ -4,8 +4,8 @@
 	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
-		        <div class="app-branding">
-		            <a class="app-logo" href="{{ route('dashboard') }}"><img class="logo-icon -me-5" src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"><span class="logo-text">SGABS</span></a>
+                <div class="app-branding">
+		            <a class="app-logo" href="{{ route('dashboarduser') }}"><img class="logo-icon" src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"></a>
 
 		        </div><!--//app-branding-->
 

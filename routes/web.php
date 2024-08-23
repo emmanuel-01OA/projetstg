@@ -62,7 +62,9 @@ Route::prefix('statut-personnel')->group(function () {
 
     Route::get('/', [StatutPerController::class, 'allstatut'])->name('statutpers.allstatut');
 
-    Route::get('/create', [StatutPerController::class, 'create'])->name('statutpers.create');
+    Route::get('/create', [StatutPerController::class, 'createStatutpers'])->name('statutpers.create');
+
+    Route::post('/create', [StatutPerController::class, 'store'])->name('statutpers.store');
 
     Route::get('/edite/{statut}', [StatutPerController::class, 'edite'])->name('statutpers.edite');
 
@@ -74,6 +76,8 @@ Route::prefix('fonction-personnel')->group(function () {
     Route::get('/', [FonctionPersController::class, 'allfonction'])->name('fonction.allfonction');
 
     Route::get('/create', [FonctionPersController::class, 'create'])->name('fonction.create');
+
+    Route::post('/create', [FonctionPersController::class, 'store'])->name('fonction.store');
 
     Route::get('/edite/{fonction}', [FonctionPersController::class, 'edite'])->name('fonction.edite');
 
@@ -176,6 +180,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
     Route::get('/dashboard-manager', [AppController::class, 'managerHome'])->name('dashboardman');
+
     Route::get('logout', [AuthController::class, 'logout']);
 
 });
@@ -203,6 +208,8 @@ Route::prefix('activite/conges-personnel')->group(function () {
     Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('mespassation.edite');
 
 });
+
+
 
 
 

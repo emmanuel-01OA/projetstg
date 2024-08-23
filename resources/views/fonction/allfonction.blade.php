@@ -24,24 +24,33 @@
                     </form> --}}
 
                 </div><!--//col-->
-                <div class="col-auto">
-
-                    <select class="form-select w-auto" >
-                          <option selected value="option-1">fonction personnel</option>
-                          <option value="orders-paid-tab" id="orders-paid-tab" >fonction inactif</option>
-                    </select>
-                </div>
-                <div class="col-auto">
+<!-- Modal toggle -->
 
 
-
+                <section>
 
                     <a class="btn btn-danger" href="#" style="color: beige"> Ajouter fonction</a>
-                </div>
+                                </section>
             </div><!--//row-->
         </div><!--//table-utilities-->
+
+
     </div><!--//col-auto-->
+
 </div><!--//row-->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
@@ -49,9 +58,6 @@
     <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">fonction personnel inactif</a>
 
 </nav>
-
-
-
 
 
 
@@ -126,6 +132,9 @@
 
     </div><!--//tab-pane-->
 
+
+
+
     <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
         <div class="app-card app-card-orders-table mb-5">
             <div class="app-card-body">
@@ -190,3 +199,5 @@
 
 
 @endsection
+
+
