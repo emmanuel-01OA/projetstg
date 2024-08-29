@@ -242,4 +242,80 @@ class PassationActController extends Controller
 
           }
 
+
+
+
+
+
+          //// ajouter les passations de l utilisateur
+
+          public function createuserPassation(){
+
+            // attente de validation pour toutes les demandes chez
+            // le manger, le backup
+            $StatutAttentepassMan = 1;
+
+            // etat de personnel toujour actif
+            // personnel actif 1 ; personnel inactif 0
+            $etatp = 1;
+
+            $statutpers = 1;
+
+            // role du manager
+            $roleManage = 1;
+
+            // role du backup
+            $rolebackup = 0;
+
+            // etat de la demande est toujour en attente
+            $StatutAttenteDemandepassation = 1;
+
+            $person = DB::table('tblper')->get();
+
+             // requete pour la base de donnees concernant la table status
+
+             // mon matricule utilisateur   ($matricul->matrcl)
+          $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+
+          //  dd($matricul->matrcl);
+
+
+          // selectionne les matriculee des managers
+
+            $manag = DB::table('tblper')
+            ->join('users', 'tblper.eml', '=', 'users.email')
+            ->select('tblper.*','users.*')
+            ->where([
+              ['users.role', '=', $roleManage ],
+              ['tblper.etatp', '=', $etatp ],
+          ])
+          ->get();
+
+
+
+            $backcup = DB::table('tblper')
+            ->join('users', 'tblper.eml', '=', 'users.email')
+            ->select('tblper.*','users.*')
+            ->where([
+              ['users.role', '=', $rolebackup ],
+              ['tblper.etatp', '=', $etatp ],
+          ])
+          ->get();
+
+
+          dd($backcup);
+
+        //   foreach ($matriculback as $users) {
+        //  dd($users->matrcl);
+        // }
+        //  dd($matriculback);
+        //   $matriculback->each(function($post) {
+        //    dd($post->email);
+        // });
+
+
+            return view('collab.passation.ajoutpassationActivite', compact('matricule', 'backcup', 'manag'));
+
+          }
         }

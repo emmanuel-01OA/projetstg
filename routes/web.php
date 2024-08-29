@@ -119,7 +119,7 @@ Route::prefix('activite/mes-passations')->group(function () {
 
     Route::get('/', [PassationActController::class, 'indexMespassations'])->name('mespassations.index');
 
-    Route::get('/create', [PassationActController::class, 'create'])->name('mespassation.create');
+    Route::get('/create', [PassationActController::class, 'createuserPassation'])->name('mespassation.create');
 
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
 
@@ -130,7 +130,7 @@ Route::prefix('activite/activites-passations')->group(function () {
 
     Route::get('/', [PassationActController::class, 'indexMesActivitespassation'])->name('mesActivitespassations.index');
 
-    Route::get('/create', [PassationActController::class, 'create'])->name('mespassation.create');
+    Route::get('/create', [PassationActController::class, 'create'])->name('mesActpassation.create');
 
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
 
@@ -192,7 +192,7 @@ Route::prefix('activite/demande-activites-passations')->group(function () {
 
     Route::get('/', [PassationActController::class, 'indexDemandepassation'])->name('demandeManpassation.index');
 
-    Route::get('/create', [PassationActController::class, 'create'])->name('mespassation.create');
+    Route::get('/create', [PassationActController::class, 'create'])->name('mespassationman.create');
 
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
 
@@ -203,7 +203,7 @@ Route::prefix('activite/conges-personnel')->group(function () {
 
     Route::get('/', [CongesController::class, 'indexCongespersonnel'])->name('Congespersonnel.index');
 
-    Route::get('/create', [CongesController::class, 'create'])->name('mespassation.create');
+    Route::get('/create', [CongesController::class, 'create'])->name('mesCongespersman.create');
 
     Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('mespassation.edite');
 

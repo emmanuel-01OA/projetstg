@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-auto">
 
-                    <a class="btn btn-danger" href="#" style="color: beige">Faire une demande</a>
+                    <a class="btn btn-danger" href="{{ route('mespassation.create') }}" style="color: beige">Faire une demande</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
