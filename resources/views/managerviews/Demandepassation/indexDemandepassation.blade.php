@@ -37,7 +37,7 @@
 
 </nav>
 
-
+ {{-- modale --}}
 
 
 
@@ -64,7 +64,9 @@
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
                                 <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+                                <th class="cell"></th>
+
+                                <th class="cell text-center" colspan="70">Action(s)</th>
 
 
                             </tr>
@@ -98,9 +100,43 @@
 
                                 @endif
 
-                                     <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Accepter</a>
+                                <td class="cell">
+
+                                    <a href="#addnew" data-bs-toggle="modal" data-bs-target="#addnew" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 tw-rounded-lg dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+
+                                        @include('managerviews.Demandepassation.modaledmdacc')
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
+                                           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                                       </svg>
+                                     Voir
+
+                                     </a>
+
+
+
+                                 </td>
+
+
+                                        <td class="cell">
+
+
+                                    <a href="#edit{{ $ActivitpassAttentes->idpasst }}" data-bs-toggle="modal"  data-bs-target="#edit" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                                        Accepter</a>
+
+                                        @include('managerviews.Demandepassation.modaledmdaccp')
+
+                                    </td>
+
+                                        <td class="cell">
+
+
+                                    <a href="#editrefus" data-bs-toggle="modal"  data-bs-target="#editrefus" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Refuser</a>
+
+                                    @include('managerviews.Demandepassation.modaleRefdmdpass')
                                 </td>
+
 
 
 
@@ -110,7 +146,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune passation enregistr&eacute;</td>
 
                             </tr>
 
@@ -125,7 +161,33 @@
                 </div><!--//table-responsive-->
 
             </div><!--//app-card-body-->
+
+
         </div><!--//app-card-->
+
+
+
+
+
+
+
+
+{{-- test Modale --}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <nav class="app-pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -164,7 +226,7 @@
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
                                 <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+
 
 
                             </tr>
@@ -174,27 +236,27 @@
                          <tbody>
 
 
-                            @forelse ($ActivitpassValider as $ActivitpasstValider )
+                            @forelse ($ActivitpassValider as $ActivitpasstValide )
 
                             <tr>
-                                <td class="cell">{{ $ActivitpasstValider->idpasst }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->code_activite }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->libelle_activite }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->description }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->libpasst }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->matrcl }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->idpasst }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->code_activite }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->libelle_activite }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->description }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->libpasst }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->pourcen_travail_eff }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->matrcl }}</td>
 
-                                <td class="cell">{{ $ActivitpasstValider->nam }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->renam }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->eml }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->datedmd }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->date_debut }}</td>
-                                <td class="cell">{{ $ActivitpasstValider->date_fin }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->nam }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->renam }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->eml }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->datedmd }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->date_debut }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->date_fin }}</td>
 
 
-                                @if($ActivitpasstValider->etatpassman == $StatutValpassMan )
-                                <td class="cell"><span class="badge bg-warning">En Attente </span></td>
+                                @if($ActivitpasstValide->etatpassman == $StatutValpassMan )
+                                <td class="cell"><span class="badge bg-success">Valid&eacute; </span></td>
 
                                 @endif
 
@@ -205,7 +267,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation valid&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation valid&eacute;e</td>
 
                             </tr>
 
@@ -219,6 +281,9 @@
                     </table>
                 </div><!--//table-responsive-->
             </div><!--//app-card-body-->
+
+
+
         </div><!--//app-card-->
 
 
@@ -261,7 +326,7 @@
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
                                 <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+
 
 
                             </tr>
@@ -290,7 +355,7 @@
 
 
                                 @if($ActivitpasstRefuser->etatpassman == $StatutRefpassMan )
-                                <td class="cell"><span class="badge bg-warning">Refus&eacute; </span></td>
+                                <td class="cell"><span class="badge bg-danger">Refus&eacute; </span></td>
 
                                 @endif
 
@@ -301,7 +366,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation refus&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation refus&eacute;e</td>
 
                             </tr>
 
@@ -345,4 +410,7 @@
 
 
 
+
+
 @endsection
+

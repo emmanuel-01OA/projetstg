@@ -13,29 +13,29 @@
          <div class="page-utilities">
             <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                 <div class="col-auto">
-                    <form class="table-search-form row gx-1 align-items-center">
+                    {{-- <form class="table-search-form row gx-1 align-items-center">
                         <div class="col-auto">
                             <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn app-btn-secondary">Search</button>
                         </div>
-                    </form>
+                    </form> --}}
 
                 </div><!--//col-->
                 <div class="col-auto">
 
-                    <select class="form-select w-auto" >
+                    {{-- <select class="form-select w-auto" >
                           <option selected value="option-1">personnel</option>
                           <option value="option-2">personnel inactif</option>
-                    </select>
+                    </select> --}}
                 </div>
                 <div class="col-auto">
 
 
 
 
-                    <a class="btn btn-danger" href="#" style="color: beige"> Ajouter personnel</a>
+                    <a class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('personnel.create') }}" style="color: beige"> Ajouter personnel</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->

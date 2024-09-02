@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Doctrine\DBAL\ArrayParameters\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 
 class ActiviteUserController extends Controller
@@ -36,5 +38,68 @@ class ActiviteUserController extends Controller
 
 
         return view('collab.activites.indexact', compact('activite', 'fonctionin', 'matricul'));
+    }
+
+
+    public function create(){
+
+
+        $activite = DB::select('select distinct * from tblac');
+
+
+        return view('collab.activites.Ajoutactive', compact('activite') );
+    }
+
+    public function postMesActivites(Request $Request){
+
+        $activite = DB::select('select distinct * from tblac');
+
+        dd($activite);
+        // try{
+
+        // //     $validator = Validator::make($Request->all(), [
+
+        // //         'datedeb' => 'required|date|before:datefin',
+        // //         'datefin' => 'required|date|after:datedeb',
+        // //         'descrip' => 'required|string',
+        // //         'activit' => 'nullable|string'
+
+
+
+        // // ]);
+
+        //     if ($validator->fails()) {
+
+        //         return redirect()->back()->withErrors($validator)->withInput();
+        //     }
+
+
+        //     $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+        //   $statuts = DB::table('travailler_sur')->insert([
+
+        //          'matrcl' => $matricul,
+        //          'date_debut' => $Request->datedeb,
+        //          'date_fin' => $Request->datefin,
+        //          'descrip' => $Request->descrip,
+        //          'activit' => $Request->activit,
+        //          'etattrs'=>1,
+
+        //     ]);
+
+        //     notyf("Ajout du statut effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+        //     return redirect()->route('mesactivites.index');
+
+
+
+        // }catch(Exception $excep){
+        //     // dd($excep);
+        //     notyf("Echec de l'Ajout du statut effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::ERROR);
+        //     return redirect()->back();
+        // }
+
+
+
+
     }
 }

@@ -25,14 +25,14 @@
                 </div><!--//col-->
                 <div class="col-auto">
 
-                    <select class="form-select w-auto" >
+                    {{-- <select class="form-select w-auto" >
                           <option selected value="option-1">Mes Activit&eacute;</option>
                           <option value="orders-paid-tab" id="orders-paid-tab" >Activit&eacute; en cour</option>
-                    </select>
+                    </select> --}}
                 </div>
                 <div class="col-auto">
 
-                    {{-- <a class="btn btn-danger" href="#" style="color: beige"> Ajouter une activit&eacute;(s)</a> --}}
+                    <a href="{{ route('mesactivites.create') }}" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800"> Ajouter une activit&eacute;(s)</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -89,7 +89,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
 
                             </tr>
 
@@ -158,7 +158,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune fonction enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="6">Aucune fonction enregistr&eacute;</td>
 
                             </tr>
 

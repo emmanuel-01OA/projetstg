@@ -29,7 +29,7 @@
 
                 <section>
 
-                    <a class="btn btn-danger" href="#" style="color: beige"> Ajouter fonction</a>
+                    <a class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('fonction.create') }}" style="color: beige"> Ajouter fonction</a>
                                 </section>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -54,8 +54,8 @@
 
 
 <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">fonction personnel actif</a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">fonction personnel inactif</a>
+    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Fonction personnel actif</a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Fonction personnel inactif</a>
 
 </nav>
 
@@ -102,7 +102,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune fontion enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune fontion enregistr&eacute;</td>
 
                             </tr>
 
@@ -175,7 +175,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune fonction enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="50" >Aucune fonction enregistr&eacute;</td>
 
                             </tr>
 

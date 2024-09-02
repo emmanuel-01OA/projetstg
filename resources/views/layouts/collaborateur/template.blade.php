@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <title>Societe generale</title>
+    <title>Plann</title>
 
     <!-- Meta -->
     <meta charset="utf-8">

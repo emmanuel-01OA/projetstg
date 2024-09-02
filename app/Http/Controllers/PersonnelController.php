@@ -21,7 +21,7 @@ class PersonnelController extends Controller
 
         $personne=DB::select('select matrcl,nam,renam,eml,conta,tblfonc.libelle_fonct,ty_user,tblper.code_statut from tblper,tblfonc,tblstentrp where tblper.code_statut=tblstentrp.code_statut and tblper.code_fonct = tblfonc.code_fonct and tblper.etatp=1');
 
-       // $personne =DB::select('select matrcl,nam,renam,eml,conta,tblfonc.libelle_fonct,ty_user,tblper.code_statut from tblper,tblfonc,tblstentrp where tblper.code_statut=tblstentrp.code_statut and tblper.code_fonct = tblfonc.code_fonct');
+       // $personne = DB::select('select matrcl,nam,renam,eml,conta,tblfonc.libelle_fonct,ty_user,tblper.code_statut from tblper,tblfonc,tblstentrp where tblper.code_statut=tblstentrp.code_statut and tblper.code_fonct = tblfonc.code_fonct');
 
        $personnelin = DB::select('select matrcl,nam,renam,eml,conta,tblfonc.libelle_fonct,ty_user,tblper.code_statut from tblper,tblfonc,tblstentrp where tblper.code_statut=tblstentrp.code_statut and tblper.code_fonct = tblfonc.code_fonct and tblper.etatp=0');
 
@@ -33,7 +33,6 @@ class PersonnelController extends Controller
     }
 
     public function edite($user){
-
 
         return view('personnel.edite', compact('user'));
     }

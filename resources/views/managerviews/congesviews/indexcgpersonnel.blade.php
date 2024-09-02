@@ -100,7 +100,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
 
                             </tr>
 
@@ -169,7 +169,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune fonction enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="6">Aucune fonction enregistr&eacute;</td>
 
                             </tr>
 

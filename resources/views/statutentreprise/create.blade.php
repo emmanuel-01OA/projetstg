@@ -25,10 +25,7 @@
                 </div><!--//col-->
                 <div class="col-auto">
 
-                    {{-- <select class="form-select w-auto" >
-                          <option selected value="option-1">Statut personnel</option>
-                          <option value="orders-paid-tab" id="orders-paid-tab" >Statut inactif</option>
-                    </select> --}}
+
                 </div>
 
 
@@ -59,27 +56,27 @@
     <div class="tw-py-8 tw-px-4 tw-mx-auto tw-max-w-2xl lg:tw-py-16">
         <h2 class="tw-mb-4 tw-text-xl tw-font-bold tw-text-gray-900 dark:tw-text-white"></h2>
 
-        @csrf
-        @method('POST')
-        <form action="{{ route('statutpers.store') }}">
+
+        <form action="{{ route('statutpers.store') }}" method="POST">
+            @csrf
 
 
             <div class="tw-grid tw-gap-4 sm:tw-grid-cols-1 sm:tw-gap-6">
 
                 <div class="tw-w-full">
                     <label for="brand" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Entrez le code du statut</label>
-                    <input type="text" name="code"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="code du statut" required>
+                    <input type="text" name="code"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="code du statut" required />
                 </div>
 
                 <div class="tw-w-full">
                     <label for="price" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">statut personnel</label>
-                    <input type="text" name="libelle"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="Entrez le libell&eacute; du statut" required>
+                    <input type="text" name="libelle"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="Entrez le libell&eacute; du statut" required />
                 </div>
 
                 <div class="col-auto">
 
 
-                    <button type="button" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">enregistrer</button>
+                    <button type="submit" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">enregistrer</button>
                 </div>
 
 

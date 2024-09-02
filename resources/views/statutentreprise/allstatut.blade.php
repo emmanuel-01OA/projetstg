@@ -41,7 +41,7 @@
 
 
 
-                    <button class="btn btn-danger"  href="" style="color: beige"> Ajouter Statut</button>
+                    <a class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800"  href="{{ route('statutpers.create') }}" style="color: beige"> Ajouter Statut</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->

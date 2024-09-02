@@ -75,9 +75,10 @@ Route::prefix('fonction-personnel')->group(function () {
 
     Route::get('/', [FonctionPersController::class, 'allfonction'])->name('fonction.allfonction');
 
-    Route::get('/create', [FonctionPersController::class, 'create'])->name('fonction.create');
+    Route::get('/create', [FonctionPersController::class, 'create' ])->name('fonction.create');
 
-    Route::post('/create', [FonctionPersController::class, 'store'])->name('fonction.store');
+    Route::post('/create', [FonctionPersController::class, 'store' ])->name('fonction.store');
+
 
     Route::get('/edite/{fonction}', [FonctionPersController::class, 'edite'])->name('fonction.edite');
 
@@ -109,8 +110,12 @@ Route::prefix('activite/mes-activites')->group(function () {
 
     Route::get('/create', [ActiviteUserController::class, 'create'])->name('mesactivites.create');
 
+    Route::post('/create', [ActiviteUserController::class, 'postMesActivites'])->name('mesactivites.poste');
+
+
     Route::get('/edite/{mesActivites}', [ActiviteUserController::class, 'edite'])->name('mesactivites.edite');
 
+    Route::put('/edite/{mesActivite}', [ActiviteUserController::class, 'edite'])->name('mesactivites.put');
 
 });
 
@@ -121,10 +126,15 @@ Route::prefix('activite/mes-passations')->group(function () {
 
     Route::get('/create', [PassationActController::class, 'createuserPassation'])->name('mespassation.create');
 
+    Route::post('/create', [PassationActController::class, 'postuserPassation'])->name('mespassation.post');
+
+
+
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
 
 
 });
+
 
 Route::prefix('activite/activites-passations')->group(function () {
 
@@ -133,6 +143,12 @@ Route::prefix('activite/activites-passations')->group(function () {
     Route::get('/create', [PassationActController::class, 'create'])->name('mesActpassation.create');
 
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
+
+    Route::put('/updatevalb/{id}', [PassationActController::class, 'AccepterPassationback'])->name('mespassationback.valid');
+
+    Route::put('/updaterefb/{id}', [PassationActController::class, 'RefuserPassationback'])->name('mespassationback.refus');
+
+
 
 });
 
@@ -164,9 +180,8 @@ route pour les admin
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/dashboard-admin', [AppController::class, 'index'])->name('dashboard');
-   // Route::get('/admin/home', [AppController::class, 'adminHome'])->name('admin.home');
 
-   Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('logout', [AuthController::class, 'logout']);
 });
 
 
@@ -186,7 +201,7 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 });
 
 
-// validation des passations
+// validation des passations du personnel IT , AT
 
 Route::prefix('activite/demande-activites-passations')->group(function () {
 
@@ -194,7 +209,13 @@ Route::prefix('activite/demande-activites-passations')->group(function () {
 
     Route::get('/create', [PassationActController::class, 'create'])->name('mespassationman.create');
 
-    Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
+   // Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
+
+   // accepter et refuser les demandes passationsdu coté du manager
+    Route::put('/updateval/{id}', [PassationActController::class, 'AccepterPassationMan'])->name('mespassationman.valid');
+
+    Route::put('/updateref/{id}', [PassationActController::class, 'RefuserPassationMan'])->name('mespassationman.refus');
+
 
 });
 

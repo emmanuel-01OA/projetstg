@@ -98,7 +98,7 @@
                <div id="submenu-4" class="collapse submenu submenu-4" data-bs-parent="#menu-accordion">
                    <ul class="submenu-list list-unstyled">
                        <li class="submenu-item"><a class="submenu-link" href="{{ route('statutpers.allstatut') }}">Liste des status</a></li>
-                       <li class="submenu-item"><a class="submenu-link" href="account.html">modifier</a></li>
+                       {{-- <li class="submenu-item"><a class="submenu-link" href="account.html">modifier</a></li> --}}
                        <li class="submenu-item"><a class="submenu-link" href="{{ route('statutpers.create') }}">Ajouter statut</a></li>
                    </ul>
                </div>
@@ -127,7 +127,7 @@
 					        <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
 						        <ul class="submenu-list list-unstyled">
 							        <li class="submenu-item"><a class="submenu-link" href="">Liste des activites</a></li>
-							        <li class="submenu-item"><a class="submenu-link" href="account.html">modifier activites</a></li>
+							        {{-- <li class="submenu-item"><a class="submenu-link" href="account.html">modifier activites</a></li> --}}
 							        <li class="submenu-item"><a class="submenu-link" href="settings.html">Ajouter activite</a></li>
 						        </ul>
 					        </div>
@@ -171,8 +171,8 @@
 					        <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
 						        <ul class="submenu-list list-unstyled">
 							        <li class="submenu-item"><a class="submenu-link" href="{{ route('fonction.allfonction') }}">liste des fonctions</a></li>
-							        <li class="submenu-item"><a class="submenu-link" href="signup.html">ajouter fonction</a></li>
-							        <li class="submenu-item"><a class="submenu-link" href="reset-password.html">Modifier fonction</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="{{ route('fonction.create') }}">ajouter fonction</a></li>
+							        {{-- <li class="submenu-item"><a class="submenu-link" href="{{ route('fonction.edite') }}">Modifier fonction</a></li> --}}
 
 						        </ul>
 					        </div>

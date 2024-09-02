@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-auto">
 
-                    <a class="btn btn-danger" href="{{ route('mespassation.create') }}" style="color: beige">Faire une demande</a>
+                    <a class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('mespassation.create') }}" style="color: beige">Faire une demande</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -85,7 +85,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune passation enregistr&eacute;</td>
 
                             </tr>
 
@@ -158,7 +158,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune passation enregistr&eacute;e </td>
+                                <td class="cell text-center" colspan="6">Aucune passation enregistr&eacute;e </td>
 
                             </tr>
 
@@ -231,7 +231,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune passation enregistr&eacute;e </td>
+                                <td class="cell text-center" colspan="6">Aucune passation enregistr&eacute;e </td>
 
                             </tr>
 

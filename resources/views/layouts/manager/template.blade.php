@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <title>Societe generale</title>
+    <title>Plann</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -18,6 +18,7 @@
     <!-- FontAwesome JS-->
     @vite('resources/css/app.css')
 
+    @vite('resources/js/app.js')
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
@@ -41,6 +42,7 @@
 <body class="app">
     <header class="app-header fixed-top">
 
+        
 
         @include('layouts.manager.topbar');
 
@@ -82,6 +84,7 @@
     <!-- Page Specific JS -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
+    <script src="{{ asset('assets/js/flowbite.min.js') }}"></script>
 
 
 </body>

@@ -41,7 +41,6 @@ class StatutPerController extends Controller
 
     public function store(Request $Request){
 
-        dd($Request->code);
 
         try{
 
@@ -49,29 +48,29 @@ class StatutPerController extends Controller
 
                 'code' => 'required|integer',
 
-               'libelle' => 'required|string|max:200',
+               'libelle' => 'required|string',
 
             ]);
 
 
 
           $statuts = DB::table('tblstentrp')->insert([
-                'code_statut' => [$Request->code],
-                 'type_stat' => [$Request->libelle ],
-                 'etatst'=> 1,
+                'code_statut' => $Request->code,
+                 'type_statut' => $Request->libelle,
+                 'etatst'=>1,
 
             ]);
 
-
-
-
+            notyf("Ajout du statut effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
 
             return redirect()->route('statutpers.allstatut');
 
 
 
         }catch(Exception $excep){
-            dd($excep);
+            // dd($excep);
+            notyf("Echec de l'Ajout du statut effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::ERROR);
+            return redirect()->back();
         }
 
 

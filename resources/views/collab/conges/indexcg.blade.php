@@ -25,10 +25,10 @@
                 </div><!--//col-->
                 <div class="col-auto">
 
-                    <select class="form-select w-auto" >
+                    {{-- <select class="form-select w-auto" >
                           <option selected value="option-1">Mes cong&eacute;(s)</option>
 
-                    </select>
+                    </select> --}}
                 </div>
                 <div class="col-auto">
 

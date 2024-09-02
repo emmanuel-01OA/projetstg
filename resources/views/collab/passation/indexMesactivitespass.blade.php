@@ -7,7 +7,7 @@
 
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0">Les Activités des passations</h1>
+        <h1 class="app-page-title mb-0">Activité(s) des passations</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-auto">
 
-                    {{-- <a class="btn btn-danger" href="#" style="color: beige">Faire une demande</a> --}}
+                    {{-- <a class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="#" style="color: beige">Faire une demande</a> --}}
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -31,9 +31,9 @@
 
 
 <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">passation(s) en attente de validation</a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">passation(s) valid&eacute;e(s) </a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">passation(s) refus&eacute;e(s) </a>
+    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Passation(s) en attente de validation</a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Passation(s) valid&eacute;e(s) </a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Passation(s) refus&eacute;e(s) </a>
 
 </nav>
 
@@ -64,7 +64,7 @@
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
                                 <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+                                <th class="cell text-center" colspan="70">Action(s)</th>
 
 
                             </tr>
@@ -74,35 +74,69 @@
                          <tbody>
 
 
-                            @forelse ($ActivitpassAttente as $ActivitpassAttentes )
+                            @forelse ($ActivitpassAttente as $ActivitpassAttent )
 
                             <tr>
-                                <td class="cell">{{ $ActivitpassAttentes->idpasst }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->code_activite }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->libelle_activite }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->description }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->libpasst }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $ActivitpassAttentes->matrcl }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->idpasst }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->code_activite }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->libelle_activite }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->description }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->libpasst }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->pourcen_travail_eff }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->matrcl }}</td>
 
-                                <td class="cell">{{ $ActivitpassAttentes->nam }}</td>
-                                 <td class="cell">{{ $ActivitpassAttentes->renam }}</td>
-                                  <td class="cell">{{ $ActivitpassAttentes->eml }}</td>
-                                   <td class="cell">{{ $ActivitpassAttentes->datedmd }}</td>
-                                    <td class="cell">{{ $ActivitpassAttentes->date_debut }}</td>
-                                    <td class="cell">{{ $ActivitpassAttentes->date_fin }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->nam }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->renam }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->eml }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->datedmd }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->date_debut }}</td>
+                                <td class="cell">{{ $ActivitpassAttent->date_fin }}</td>
 
 
-                                @if($ActivitpassAttentes->etatpassbackup == $StatutAttentepassback)
+                                @if($ActivitpassAttent->etatpassbackup == $StatutAttentepassback)
                                 <td class="cell"><span class="badge bg-warning">En Attente </span></td>
 
                                 @endif
 
-                                     <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Accepter</a>
+
+                                <td class="cell">
+
+                                    <a href="#addne" data-bs-toggle="modal" data-bs-target="#addne" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 tw-rounded-lg dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+
+                                        @include('collab.passation.modaledecision.modalvoirpass')
+
+
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
+                                           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                                       </svg>
+                                     Voir
+
+                                     </a>
+
+
+
+                                     </td>
+
+
+                                        <td class="cell">
+
+
+                                    <a href="#editp{{ $ActivitpassAttent->idpasst }}" data-bs-toggle="modal"  data-bs-target="#editp" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                                        Accepter</a>
+
+                                        @include('collab.passation.modaledecision.modalaccpass')
+
+                                    </td>
+
+                                        <td class="cell">
+
+
+                                    <a href="#editbrefus{{ $ActivitpassAttent->idpasst }}" data-bs-toggle="modal"  data-bs-target="#editbrefus" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Refuser</a>
+
+                                    @include('collab.passation.modaledecision.modalRefdmdpass')
                                 </td>
-
-
 
 
                             </tr>
@@ -110,7 +144,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation enregistr&eacute;</td>
+                                <td class="cell  text-center" colspan="20">Aucune passation enregistr&eacute;</td>
 
                             </tr>
 
@@ -163,8 +197,8 @@
                                 <th class="cell">date demande</th>
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
-                                <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+                                <th class="cell">Etat passation</th>
+
 
 
                             </tr>
@@ -194,7 +228,7 @@
 
 
                                 @if($ActivitpasstValider->etatpassbackup == $StatutValpassback )
-                                <td class="cell"><span class="badge bg-warning">En Attente </span></td>
+                                <td class="cell"><span class="badge bg-success">Valid&eacute;e </span></td>
 
                                 @endif
 
@@ -205,7 +239,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation valid&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation valid&eacute;e</td>
 
                             </tr>
 
@@ -260,8 +294,8 @@
                                 <th class="cell">date demande</th>
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
-                                <th class="cell">&eacute;tat passation</th>
-                                <th class="cell">Action</th>
+                                <th class="cell">Etat passation</th>
+
 
 
                             </tr>
@@ -290,7 +324,7 @@
 
 
                                 @if($ActivitpasstRefuser->etatpassbackup == $StatutRefpassback )
-                                <td class="cell"><span class="badge bg-warning">Refus&eacute; </span></td>
+                                <td class="cell"><span class="badge bg-danger">Refus&eacute; </span></td>
 
                                 @endif
 
@@ -301,7 +335,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune passation refus&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation refus&eacute;e</td>
 
                             </tr>
 

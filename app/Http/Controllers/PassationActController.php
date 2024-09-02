@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -51,7 +51,7 @@ class PassationActController extends Controller
 
 
 
-          // les acivités de la passation du backup
+        // les acivités de la passation du backup
 
         //  $Activitpass = DB::table('valider')->get();
 
@@ -186,7 +186,7 @@ class PassationActController extends Controller
           // jointure de plusieurs tables
 
           $ActivitpassAttente = DB::table('valider')
-          ->join('tbldmdpasst', 'valider.idpasst', '=', 'tbldmdpasst.idpasst')
+          ->join('tbldmdpasst', 'valider.idpasst','=', 'tbldmdpasst.idpasst')
           ->join('tblper', 'tblper.matrcl', '=','tbldmdpasst.matrcl')
           ->join('tblac', 'tblac.code_activite', '=','tbldmdpasst.code_activite')
           ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
@@ -210,7 +210,7 @@ class PassationActController extends Controller
           ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
           ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*','tblper.*','travailler_sur.*')
           ->where([
-              ['valider.matrcl_back', '=', $matricule->matrcl ],
+              ['valider.matrclman', '=', $matricule->matrcl ],
               ['valider.etatpassman', '=', $StatutValpassMan ],
               ['etatd', '=', $EtatdmdpassMan ],
           ])->orderBy('tbldmdpasst.datedmd')
@@ -228,7 +228,7 @@ class PassationActController extends Controller
           ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
           ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*', 'tblper.*','travailler_sur.*')
           ->where([
-              ['valider.matrcl_back', '=', $matricule->matrcl ],
+              ['valider.matrclman', '=', $matricule->matrcl ],
               ['valider.etatpassman', '=', $StatutRefpassMan ],
               ['etatd', '=', $EtatdmdpassMan ],
           ])->orderBy('tbldmdpasst.datedmd')
@@ -242,6 +242,7 @@ class PassationActController extends Controller
 
           }
 
+          //
 
 
 
@@ -279,8 +280,6 @@ class PassationActController extends Controller
 
 
           //  dd($matricul->matrcl);
-
-
           // selectionne les matriculee des managers
 
             $manag = DB::table('tblper')
@@ -304,7 +303,19 @@ class PassationActController extends Controller
           ->get();
 
 
-          dd($backcup);
+
+
+
+          $activitep = DB::table('travailler_sur')
+          ->join('tblper', 'tblper.matrcl','=','travailler_sur.matrcl' )
+          ->select('tblper.*','travailler_sur.*')
+          ->where([
+            ['tblper.etatp', '=',$etatp ],
+            ['tblper.matrcl','=', $matricul],
+
+          ]);
+
+         dd($activitep);
 
         //   foreach ($matriculback as $users) {
         //  dd($users->matrcl);
@@ -315,7 +326,132 @@ class PassationActController extends Controller
         // });
 
 
-            return view('collab.passation.ajoutpassationActivite', compact('matricule', 'backcup', 'manag'));
+            return view('collab.passation.ajoutpassationActivite', compact('matricul', 'backcup', 'manag','activitep'));
 
           }
+
+
+
+          public function postuserPassation(Request $request){
+
+
+
+
+
+          }
+
+
+          // fonction pour les paramètres d affichages
+           ///
+
+
+
+           // validation des parametres des passations
+          public function AccepterPassationMan(Request $request, $id){
+
+         try{
+
+            // 2 pour accepter la passation
+            $ValidpassMan = 2;
+
+            $AccepterMan = DB::update('update valider set etatpassman = ? , date_validman = now() where valider.idpasst = ?',[$ValidpassMan , $id] );
+
+            //     table('valider')->where(['idpasst' => $id ])
+            // ->update(
+            //     ['etatpassman', , $ValidpassMan ],
+            //     ['date_validman', '=',date('Y-m-d H:i:s')] );
+
+
+            // validation de l 'etat passation du manager
+
+            notyf("passation accept&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+
+            return redirect()->route('demandeManpassation.index');
+
+
+         }catch(Exception $e){
+            dd($e);
+         }
+
+        }
+
+
+        public function RefuserPassationMan(Request $request, $id){
+
+            try{
+
+               // 2 pour accepter la passation
+               $RefuserpassMan = 0;
+
+               $AccepterMan = DB::update('update valider set etatpassman = ? , date_validman = now() where valider.idpasst = ?',[$RefuserpassMan, $id] );
+
+               //     table('valider')->where(['idpasst' => $id ])
+               // ->update(
+               //     ['etatpassman', , $ValidpassMan ],
+               //     ['date_validman', '=',date('Y-m-d H:i:s')] );
+
+
+               // validation de l 'etat passation du manager
+
+               notyf("passation refus&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::INFO);
+
+               return redirect()->route('demandeManpassation.index');
+
+
+            }catch(Exception $e){
+               dd($e);
+            }
+
+           }
+
+
+
+
+        public function AccepterPassationBack(Request $request, $id){
+
+            try{
+
+                // 2 pour accepter la passation backup
+                $ValidpassBack = 2;
+
+                $AccepterMan = DB::update('update valider set etatpassbackup = ? , date_validpassback = now() where valider.idpasst = ?',[$ValidpassBack, $id] );
+
+                notyf("passation accept&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+
+                return redirect()->route('mesActivitespassations.index');
+
+
+             }catch(Exception $e){
+                dd($e);
+             }
+
+        }
+
+
+        public function RefuserPassationBack(Request $request, $id){
+
+            try{
+
+                // 0 pour refuser la passation backup
+                $RefuspassBack = 0;
+
+                $AccepterMan = DB::update('update valider set etatpassbackup = ? , date_validpassback = now() where valider.idpasst = ?',[$RefuspassBack , $id] );
+
+                notyf("passation refus&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::INFO);
+
+                return redirect()->route('mesActivitespassations.index');
+
+
+             }catch(Exception $e){
+                dd($e);
+             }
+
+        }
+
+
+
+
+
+
+
         }

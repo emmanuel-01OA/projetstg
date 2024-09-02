@@ -76,7 +76,7 @@
                                 <td class="cell" colspan="50" >{{ $activites->libelle_activite }}</td>
                                 <td class="cell"><span class="truncate">{{ $activites->description }}</span></td>
 
-                                
+
                                 {{-- @if($activites-> =="1" ) --}}
 
 
@@ -90,7 +90,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune activit&eacute; enregistr&eacute;</td>
 
                             </tr>
 
@@ -159,7 +159,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune fonction enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="6">Aucune fonction enregistr&eacute;</td>
 
                             </tr>
 
