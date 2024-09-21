@@ -22,6 +22,8 @@
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
+    
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
 
@@ -42,7 +44,7 @@
 <body class="app">
     <header class="app-header fixed-top">
 
-        
+
 
         @include('layouts.manager.topbar');
 

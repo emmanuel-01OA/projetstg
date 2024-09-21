@@ -304,18 +304,27 @@ class PassationActController extends Controller
 
 
 
+          $activitep = DB::select('select tblper.* ,travailler_sur.* from travailler_sur,tblper where  tblper.etatp=1 and tblper.matrcl = ?', [$matricul->matrcl] );
+
+        //  dd($activitep);
+
+        //  $activitep = DB::table('travailler_sur')
+        // ->join('tblper', 'tblper.matrcl', '=', 'travailler_sur.matrcl')
+        // ->select('tblper.*', 'travailler_sur.*')
+        // ->where([
+        //     ['tblper.etatp', '=', $etatp],
+        //     ['tblper.matrcl', '=', $matricul],
+        // ])
+        // ->get();
 
 
-          $activitep = DB::table('travailler_sur')
-          ->join('tblper', 'tblper.matrcl','=','travailler_sur.matrcl' )
-          ->select('tblper.*','travailler_sur.*')
-          ->where([
-            ['tblper.etatp', '=',$etatp ],
-            ['tblper.matrcl','=', $matricul],
+        //   foreach ($activitep as $users) {
+        //     dd($activitep);
 
-          ]);
+        //     }
 
-         dd($activitep);
+
+         //dd($activitep);
 
         //   foreach ($matriculback as $users) {
         //  dd($users->matrcl);
@@ -334,8 +343,10 @@ class PassationActController extends Controller
 
           public function postuserPassation(Request $request){
 
+     // mon matricule utilisateur   ($matricul->matrcl)
+     $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
 
-
+   // activitep , Descrip , libellepassation , descrippasst , pourcenteff , libproj
 
 
           }

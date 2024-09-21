@@ -1,5 +1,9 @@
 import './bootstrap';
 import 'flowbite';
+import Chart from 'chart.js/auto';
+import $ from 'jquery';
+
+
 
 function toggleModal() {
     const modal = document.getElementById('modal');

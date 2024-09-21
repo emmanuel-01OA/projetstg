@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TravaillerSur
- * 
+ *
  * @property string $matrcl
  * @property string $code_activite
  * @property int $idtrav
  * @property Carbon|null $date_debut
  * @property Carbon|null $date_fin
  * @property int|null $etattrs
- * 
+ *
  * @property Tblper $tblper
  * @property Tblac $tblac
  *
@@ -39,9 +39,12 @@ class TravaillerSur extends Model
 
 	protected $fillable = [
 		'idtrav',
-		'date_debut',
-		'date_fin',
-		'etattrs'
+		'matrcl',
+        'code_activite',
+        'date_debut',
+        'date_fin',
+        'descrip',
+        'etattrs',
 	];
 
 	public function tblper()

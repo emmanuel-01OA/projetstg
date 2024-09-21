@@ -59,78 +59,93 @@
     <div class="tw-py-8 tw-px-4 tw-mx-auto tw-max-w-2xl lg:tw-py-16">
         <h2 class="tw-mb-4 tw-text-xl tw-font-bold tw-text-gray-900 dark:tw-text-white"></h2>
 
-        @csrf
-        @method('POST')
-        <form action="">
 
+
+        <form action="{{ route('mespassation.post') }}" method="POST">
+            @csrf
 
             <div class="tw-grid tw-gap-4 sm:tw-grid-cols-1 sm:tw-gap-5">
 
                 <div class="tw-grid tw-gap-4 sm:tw-grid-cols-1 sm:tw-gap-5">
                 <div class="tw-w-full">
-                    <label for="brand" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Libelle</label>
-                    <input type="text" name="code"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="entrez le libelle" required>
+                    <label for="brand" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Libelle de la passation : </label>
+                    <input type="text" name="libellepassation" id="libellepassation" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="entrez le libelle" required>
                 </div>
                 <div class="tw-w-full">
                     <label for="brand" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Descripion de la passation</label>
-                    <input type="text" name="code"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="entrez la description de la passation" required>
+                    <input type="text" name="Descrip"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="entrez la description de la passation" required>
                 </div>
                 <div class="tw-w-full">
 
                     <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionnez votre activite</label>
-                    @forelse ($activitep as $activiteps )
 
-                    <select id="category" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option selected="">{{ $activiteps->code_activite }}</option>
-                        <option value="TV">TV/Monitors</option>
-
-                    </select>
-                    @empty
-
-                    @endforelse
+                    <select name="activitep" id='activitep' class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500">
 
 
-               </div>
+                    @forelse ( $activitep as $activiteps )
+                    <option selected="" class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white" value="{{ $activiteps->code_activite }}"> {{ $activiteps->code_activite }} - {{ $activiteps->descrip }}</option>
 
-                <div class="tw-w-full">
-                    <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionnez le backup :</label>
-                    <select id="category" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option selected="">Electronics</option>
-                        <option value="TV">TV/Monitors</option>
+                   @empty
+                   <option selected=""> Aucune activit&eacute;</option>
 
-                    </select>
-                 </div>
+                   @endforelse
 
-                <div class="tw-w-full">
-                    <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Manager :</label>
-                    <input type="text" name="libelle"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="Entrez le libell&eacute; du statut" required>
+                   </select>
                 </div>
 
                 <div class="tw-w-full">
+
+                   <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionnez le pourcentage d'avancement de votre projet :</label>
+
+                    <select id="category" name="pourcenteff" id='pourcenteff' class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                     <option value=""></option>
+                     <option value="0">0</option>
+                     <option value="10">10</option>
+                     <option value="20">20</option>
+                     <option value="30">30</option>
+                     <option value="40">40</option>
+                     <option value="50">50</option>
+                     <option value="60">60</option>
+                     <option value="70">70</option>
+                     <option value="80">80</option>
+                     <option value="90">90</option>
+                    <option value="100">100</option>
+
+                    </select>
+
+               </div>
+
+                {{-- <div class="tw-w-full">
+                    <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionnez le backup :</label>
+                    <select id="category" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        <option selected="">Koussi - Manager Back</option>
+                        <option value="TV"></option>
+
+                    </select>
+                 </div> --}}
+
+                {{-- <div class="tw-w-full">
+                    <label for="price" class="tw-block tw-mb-1 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Manager :</label>
+                    <input type="text" name="libelle"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="Entrez le libell&eacute; du statut" required>
+                </div> --}}
+
+                <div class="tw-w-full">
                     <label for="brand" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Libellé du/des projets :</label>
-                    <input type="text" name="code"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="code du statut" required>
+                    <input type="text" name="libproj"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="" required>
                 </div>
 
                 </div>
 
                 <div class="tw-w-full">
                     <label for="message" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description :</label>
-                    <textarea id="message" name="message" rows="4" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-lg tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" required></textarea>
+                    <textarea id="message" name="descrippasst" rows="4" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-lg tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" required></textarea>
                 </div>
-                <div class="tw-w-full">
-                    <label for="brand" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionnez votre manager</label>
-                    <select id="category" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option selected="">Electronics</option>
-                        <option value="TV">TV/Monitors</option>
 
-                    </select>
-
-                </div>
 
                 <div class="col-auto tw-mx-auto">
 
 
-                    <button type="button" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">Faire la demande</button>
+                    <button type="submit" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">Faire la demande</button>
                 </div>
 
 

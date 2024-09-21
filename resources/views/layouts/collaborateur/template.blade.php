@@ -14,6 +14,8 @@
 
     @vite('resources/css/app.css')
 
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 

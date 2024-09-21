@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Tblcg
- * 
+ *
  * @property float $idcg
  * @property string|null $lbelle_conges
  * @property string|null $ancg
  * @property int|null $etatc
- * 
+ *
  * @property Collection|Planifier[] $planifiers
  *
  * @package App\Models
@@ -29,7 +29,7 @@ class Tblcg extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idcg' => 'float',
+		'idcg' => 'int',
 		'etatc' => 'int'
 	];
 

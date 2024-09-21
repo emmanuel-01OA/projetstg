@@ -1,5 +1,5 @@
 
-@extends('layouts.template')
+@extends('layouts.manager.template')
 
 @section('content')
 

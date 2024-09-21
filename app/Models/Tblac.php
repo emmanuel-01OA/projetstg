@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Tblac
- * 
+ *
  * @property string $code_activite
  * @property int $id_type_act
  * @property string|null $description
  * @property int|null $etatac
  * @property Carbon|null $date_deb
  * @property Carbon|null $datefin
- * 
+ *
  * @property Tbltyac $tbltyac
  * @property Collection|TravaillerSur[] $travailler_surs
  * @property Collection|Tbldmdpasst[] $tbldmdpassts
@@ -45,7 +45,8 @@ class Tblac extends Model
 		'description',
 		'etatac',
 		'date_deb',
-		'datefin'
+		'datefin',
+        'status'
 	];
 
 	public function tbltyac()

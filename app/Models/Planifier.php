@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Planifier
- * 
+ *
  * @property string $matrcl
  * @property float $idcg
  * @property float $id_p
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $etatf
  * @property float|null $taux_plcg
  * @property string|null $man_matricule
- * 
+ *
  * @property Tblper $tblper
  * @property Tblcg $tblcg
  * @property Tblman|null $tblman
@@ -34,8 +34,8 @@ class Planifier extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'idcg' => 'float',
-		'id_p' => 'float',
+		'idcg' => 'int',
+		'id_p' => 'int',
 		'date_depart' => 'datetime',
 		'date_arrive' => 'datetime',
 		'etatf' => 'int',

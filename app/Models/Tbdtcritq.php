@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Tbdtcritq
- * 
+ *
  * @property int $id_crit
  * @property "char" $code_act
  * @property "char"|null $lib_crit
@@ -29,7 +29,6 @@ class Tbdtcritq extends Model
 	protected $casts = [
 		'id_crit' => 'int',
 		'code_act' => '"char"',
-		'lib_crit' => '"char"',
 		'date_deb_crit' => 'datetime',
 		'date_fin_crit' => 'datetime'
 	];
@@ -37,6 +36,7 @@ class Tbdtcritq extends Model
 	protected $fillable = [
 		'lib_crit',
 		'date_deb_crit',
-		'date_fin_crit'
+		'date_fin_crit',
+        'etatcrip'
 	];
 }

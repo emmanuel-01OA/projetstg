@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DataActiviteController;
 use App\Http\Controllers\FonctionPersController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PassationActController;
 use App\Http\Controllers\StatutPerController;
 use App\Http\Controllers\ActiviteUserController;
 use App\Http\Controllers\CongesController;
+use App\Http\Controllers\ActivitesManagerController;
+use App\Http\Controllers\AttributionBackupController;
+use App\Http\Controllers\DataCongesController;
+use App\Http\Controllers\TempsCritiqueActivitesController;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -117,6 +123,11 @@ Route::prefix('activite/mes-activites')->group(function () {
 
     Route::put('/edite/{mesActivite}', [ActiviteUserController::class, 'edite'])->name('mesactivites.put');
 
+    Route::get('/getdataActivites', [DataActiviteController::class, 'indexDataAct'])->name('DataActivite.index');
+
+
+
+
 });
 
 
@@ -127,8 +138,6 @@ Route::prefix('activite/mes-passations')->group(function () {
     Route::get('/create', [PassationActController::class, 'createuserPassation'])->name('mespassation.create');
 
     Route::post('/create', [PassationActController::class, 'postuserPassation'])->name('mespassation.post');
-
-
 
     Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
 
@@ -158,12 +167,13 @@ Route::prefix('activite/mes-conges')->group(function () {
 
     Route::get('/', [CongesController::class, 'indexconges'])->name('mesconges.index');
 
-    Route::get('/create', [CongesController::class, 'create'])->name('mesconges.create');
+    Route::post('/create', [CongesController::class, 'planifcongescreate'])->name('mesplanificationconge.store');
+
+    Route::get('/create', [CongesController::class, 'congescreate'])->name('mescongesuser.create');
 
     Route::get('/edite/{conges}', [CongesController::class, 'edite'])->name('mesconges.edite');
 
-
-});
+   });
 
 
 
@@ -220,7 +230,7 @@ Route::prefix('activite/demande-activites-passations')->group(function () {
 });
 
 
-Route::prefix('activite/conges-personnel')->group(function () {
+Route::prefix('conges/conges-personnel')->group(function () {
 
     Route::get('/', [CongesController::class, 'indexCongespersonnel'])->name('Congespersonnel.index');
 
@@ -229,6 +239,94 @@ Route::prefix('activite/conges-personnel')->group(function () {
     Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('mespassation.edite');
 
 });
+
+// demande conges du personnel
+
+Route::prefix('conges/demandes-conges-personnel')->group(function () {
+
+    Route::get('/', [CongesController::class, 'indexDemCongespersonnel'])->name('DemCongespersonnel.index');
+
+    Route::get('/create', [CongesController::class, 'create'])->name('demande-Congespersman.create');
+
+    Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('demande-mespassation.edite');
+
+});
+
+// route pour les activites
+
+Route::prefix('activite/Les-activites')->group(function () {
+
+    Route::get('/', [ActivitesManagerController::class, 'indexLesactivites'])->name('LesActivites.index');
+
+    Route::get('/create', [ActivitesManagerController::class, 'Actcreate'])->name('LesActivites.create');
+
+    Route::post('/create', [ActivitesManagerController::class, 'CreateActivite'])->name('LesActivites.create');
+
+
+    Route::get('/edite/{activites}', [ActivitesManagerController::class, 'edite'])->name('LesActivites.edite');
+
+});
+
+
+
+
+
+Route::prefix('activite/Temps-critiques-activites')->group(function () {
+
+    Route::get('/', [TempsCritiqueActivitesController::class, 'indexTempsCritiqueactivites'])->name('TempsCritiqActivites.index');
+
+    Route::get('/create', [TempsCritiqueActivitesController::class, 'TempsCritiqActivitescreat'])->name('TempsCritiqActivites.create');
+
+    Route::post('/create', [TempsCritiqueActivitesController::class, 'TempsCritiqActivitescreate'])->name('TempsCritiqActivites.store');
+
+    Route::get('/activites/{activity}', [TempsCritiqueActivitesController::class, 'DetailActiviteSelect'])->name('activities.showAjax');
+
+    Route::get('/edite/{activites}', [TempsCritiqueActivitesController::class, 'TempsCritiqActivitesedite'])->name('TempsCritiqActivites.edite');
+
+});
+
+
+Route::prefix('activite/Type-activites')->group(function () {
+
+    Route::get('/', [ActivitesManagerController::class, 'indexTypeActiviteman'])->name('TypeActiviteman.index');
+
+    Route::get('/create', [ActivitesManagerController::class, 'TypeActivitemanCreate'])->name('TypeActiviteman.create');
+
+    Route::get('/edite/{activites}', [ActivitesManagerController::class, 'TypeActivitemanEdit'])->name('TypeActiviteman.edite');
+
+});
+
+Route::prefix('activite/Attrib-backup')->group(function () {
+
+    Route::get('/', [AttributionBackupController::class, 'indexAttributionbackup'])->name('Attributionbackup.index');
+
+    Route::get('/create', [AttributionBackupController::class, 'attribbackcreat'])->name('Attributionbackup.create');
+
+    Route::post('/create', [AttributionBackupController::class, 'AttributionbackupStore'])->name('Attributionbackup.store');
+
+    Route::get('/edite/{activites}', [AttributionBackupController::class, 'AttributionbackupEdit'])->name('Attributionbackup.edite');
+
+});
+
+
+
+Route::prefix('activite/VisualisationConges')->group(function () {
+
+    Route::get('/', [DataCongesController::class, 'indexVisualisationConges'])->name('VisualisationConges.index');
+
+});
+
+Route::prefix('activite/VisualisationActivites')->group(function () {
+
+    Route::get('/', [DataActiviteController::class, 'indexVisualisationActivites'])->name('VisualisationActivites.index');
+
+});
+
+
+
+
+
+
 
 
 

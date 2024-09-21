@@ -13,7 +13,7 @@
             <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                 <li class="nav-item">
 
-                    <a class="nav-link active" href="{{ route('dashboardman') }}">
+                    <a class="nav-link " href="{{ route('dashboardman') }}">
                         <span class="nav-icon">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -53,17 +53,37 @@
                     </a><!--//nav-link-->
                     <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link" href="notifications.html">
-                                  Activit&eacute;s </a></li>
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('LesActivites.index') }}">
+                                 Les Activit&eacute;s </a></li>
 
                         </ul>
                     </div>
 
                     <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
+                            <li class="submenu-item"><a class="submenu-link" href="{{ route('TempsCritiqActivites.index') }}">
+                                Temps critiques activit&eacute;s </a></li>
+
+                        </ul>
+                    </div>
+
+
+
+                    <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
+                        <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link" href="{{ route('demandeManpassation.index') }}">
                                  Demande de passation </a></li>
 
+                        </ul>
+                    </div>
+
+                    <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
+                        <ul class="submenu-list list-unstyled">
+                            <a class="submenu-link" href="{{ route('VisualisationActivites.index') }}">
+                                <li class="submenu-item">Visualisation des activit&eacute;s</li>
+                            </a>
+                            {{-- <li class="submenu-item"><a class="submenu-link" href="#" >modifier</a></li>
+                                    <li class="submenu-item"><a class="submenu-link"href="{{ route('personnel.create') }}">Ajouter personnel</a></li> --}}
                         </ul>
                     </div>
 
@@ -132,6 +152,33 @@
                     </ul>
                 </div>
 
+                {{-- pour les demandes de congés --}}
+
+                <div id="submenu-6" class="collapse submenu submenu-6" data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <a class="submenu-link" href="{{ route('DemCongespersonnel.index') }}">
+                            <li class="submenu-item">Demande Cong&eacute;s</li>
+                        </a>
+                        {{-- <li class="submenu-item"><a class="submenu-link" href="#" >modifier</a></li>
+                                <li class="submenu-item"><a class="submenu-link"href="{{ route('personnel.create') }}">Ajouter personnel</a></li> --}}
+                    </ul>
+                </div>
+
+
+                {{-- visualisation des congés --}}
+
+                <div id="submenu-6" class="collapse submenu submenu-6" data-bs-parent="#menu-accordion">
+                    <ul class="submenu-list list-unstyled">
+                        <a class="submenu-link" href="{{ route('VisualisationConges.index') }}">
+                            <li class="submenu-item">Visualisation des cong&eacute;s</li>
+                        </a>
+                        {{-- <li class="submenu-item"><a class="submenu-link" href="#" >modifier</a></li>
+                                <li class="submenu-item"><a class="submenu-link"href="{{ route('personnel.create') }}">Ajouter personnel</a></li> --}}
+                    </ul>
+                </div>
+
+
+
 
                     <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
                         data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
@@ -155,17 +202,25 @@
                         </span><!--//submenu-arrow-->
                     </a><!--//nav-link-->
                     <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
-                        <ul class="submenu-list list-unstyled">
-                            <a class="submenu-link" href="{{ route('personnel.index') }}">
+                        {{-- <ul class="submenu-list list-unstyled">
+                            <a class="submenu-link" href="{{ route('') }}">
                                 <li class="submenu-item">le personnel</li>
                             </a>
-                            {{-- <li class="submenu-item"><a class="submenu-link" href="#" >modifier</a></li>
-							        <li class="submenu-item"><a class="submenu-link"href="{{ route('personnel.create') }}">Ajouter personnel</a></li> --}}
+                            <li class="submenu-item"><a class="submenu-link" href="#" >modifier</a></li>
+							        <li class="submenu-item"><a class="submenu-link"href="{{ route('personnel.create') }}">Ajouter personnel</a></li>
+                        </ul> --}}
+
+
+                        <ul class="submenu-list list-unstyled">
+                            <a class="submenu-link" href="{{ route('Attributionbackup.index') }}" ><li class="submenu-item">Attribution backup </li></a>
+
                         </ul>
+
+
                     </div>
                 </li><!--//nav-item-->
 
-                <li class="nav-item has-submenu">
+                {{-- <li class="nav-item has-submenu">
 
 
 
@@ -177,7 +232,7 @@
 
                         </ul>
                     </div>
-                </li><!--//nav-item-->
+                </li><!--//nav-item--> --}}
 
 
 

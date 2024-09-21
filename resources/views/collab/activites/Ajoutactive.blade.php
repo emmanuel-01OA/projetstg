@@ -6,7 +6,7 @@
 
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0">AJOUTER VOTRE ACTIVITÉ</h1>
+        <h1 class="app-page-title mb-0">PLANIFIER VOTRE ACTIVITÉ</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">
@@ -61,16 +61,15 @@
 
         <form action="{{ route('mesactivites.poste') }}" method="POST">
             @csrf
-         
+
             <div class="tw-grid tw-gap-4 sm:tw-grid-cols-1 sm:tw-gap-6">
 
 
                 <div class="tw-w-full">
-                    <label for="typeact" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionner l' activite</label>
-
+                    <label for="typeact" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Selectionner le type d' activite</label>
+                    {{-- value="{{ old('activity') }}" --}}
+                    <select id="category" name="activity" id='activit'  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500">
                     @forelse ( $activite as $activites )
-
-                    <select id="category" name="activit" id='activit' class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:ring-primary-500 focus:border-primary-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         <option selected="" value="{{ $activites->code_activite }}">{{ $activites->code_activite }} - {{ $activites->description }} </option>
 
                     @empty
@@ -80,9 +79,9 @@
 
 
                     </select>
-
-
                 </div>
+
+
                 <div class="tw-w-full">
                     <label for="descrip" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description de l'activité</label>
                     <input type="text" name="descrip" id="descrip" value="{{ old('descrip') }}"  class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" placeholder="description" />

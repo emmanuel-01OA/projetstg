@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-auto">
 
-                    <a class="tw-text-white tw-bg-red-700  hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('LesActivites.create') }}" style="color: beige"> Ajouter une activit&eacute;(s)</a>
+                    <a class="tw-text-white tw-bg-red-700  hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800tw-text-white tw-bg-red-700  hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('TempsCritiqActivites.create') }}" style="color: beige"> Affecter un temps critique</a>
                 </div>
             </div><!--//row-->
         </div><!--//table-utilities-->
@@ -41,10 +41,13 @@
 
 
 <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Les activit&eacute;s</a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Les activit&eacute;s Annul&eacute;es</a>
+    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Temps critique des activit&eacute;s Actif</a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Temps critique des activit&eacute;s inactif</a>
 
 </nav>
+
+
+
 
 
 
@@ -53,40 +56,42 @@
         <div class="app-card app-card-orders-table shadow-sm mb-5">
             <div class="app-card-body">
                 <div class="table-responsive">
-                    <table class="table mb-0 text-left">
+                    <table class="table app-table-hover mb-0 text-left">
                         <thead>
                             <tr>
-
                                 <th class="cell">Num&eacute;ro activit&eacute;</th>
                                 <th class="cell">Libell&eacute; activit&eacute;</th>
                                 <th class="cell">type activite</th>
-                                <th class="cell">Desription de l activit&eacute;</th>
-                                <th class="cell">Date debut activit&eacute;</th>
-                                <th class="cell">Date fin  activit&eacute;</th>
-                                <th class="cell">Statut activit&eacute;</th>
+                                <th class="cell">Description</th>
+                                <th class="cell">Date de début de l'activit&eacute;</th>
+                                <th class="cell">Date limite </th>
+                                <th class="cell">Statut de l'activit&eacute;</th>
+                                <th class="cell">Libell&eacute; critique</th>
+                                <th class="cell">Date de debut temps critique</th>
+                                <th class="cell">Date de fin temps critique</th>
+                                <th class="cell">&eacute;tat</th>
 
-                                <th class="cell">Etat activit&eacute;</th>
+                                {{-- <th class="cell">2e Date de debut temps critique</th>
+                                <th class="cell">2e Date de fin temps critique</th> --}}
+
 
                             </tr>
                         </thead>
                         <tbody>
 
 
-                            @forelse ($ActiviteActif as $ActiviteActifs)
+                            @forelse ($TmpActactif as $TmpActactifs)
 
                             <tr>
-                                <td class="cell">{{ $ActiviteActifs->code_activite }}</td>
-
-                                <td class="cell">{{ $ActiviteActifs->lib_act }}</td>
-
-                                <td class="cell">{{ $ActiviteActifs->libelle_activite }}</td>
-                                <td class="cell">{{ $ActiviteActifs->description }}</td>
-                                <td class="cell">{{ $ActiviteActifs->date_deb}}</td>
-                                <td class="cell">{{ $ActiviteActifs->datefin }}</td>
+                                <td class="cell">{{ $TmpActactifs->code_act }}</td>
+                                <td class="cell">{{ $TmpActactifs->lib_act }}</td>
+                                <td class="cell">{{ $TmpActactifs->libelle_activite }}</td>
+                                <td class="cell">{{ $TmpActactifs->description }}</td>
+                                <td class="cell">{{ $TmpActactifs->date_deb }}</td>
+                                <td class="cell">{{ $TmpActactifs->datefin}}</td>
 
 
-
-                                @if($ActiviteActifs->statutac =="1")
+                                @if($TmpActactifs->statutac =="1")
 
                                 <td class="cell">
                                 <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
@@ -97,7 +102,7 @@
                                   </dd>
                                 </td>
 
-                                @elseif ($ActiviteActifs->statutac =="2")
+                                @elseif ($TmpActactifs->statutac =="2")
                                 <td class="cell">
                                     <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -107,27 +112,34 @@
                                       </dd>
                                 </td>
 
-                                  @elseif ($ActiviteActifs->statutac =="0")
+                                  @elseif ($TmpActactifs->statutac =="0")
 
                                   <td class="cell">
                                     <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                         </svg>
-                                        planifer pour plus tard
+                                        Planifer pour plus tard
                                       </dd>
                                 </td>
 
                                 @endif
 
+                                <td class="cell">{{ $TmpActactifs->lib_crit }}</td>
+
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActactifs->date_deb_crit)->format('d/m/y') }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActactifs->date_fin_crit)->format('d/m/y') }}</td>
 
 
-                                @if($ActiviteActifs->etatac =="1")
-                                <td class="cell"><span class="badge bg-success">Actif</span></td>
+
+                                @if($TmpActactifs->etatcrip =="1" )
+
+                               <td class="cell"><span class="badge bg-success">Inactif</span></td>
+
 
                                 @else
 
-                                <td class="cell"><span class="badge bg-danger">Inactif</span></td>
+                               <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
 
                             </tr>
@@ -135,11 +147,13 @@
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="6">Aucune Activit&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucun temps critique attribu&eacute;</td>
 
                             </tr>
 
                             @endforelse
+
+
 
                         </tbody>
                     </table>
@@ -171,34 +185,41 @@
                     <table class="table mb-0 text-left">
                         <thead>
                             <tr>
-
                                 <th class="cell">Num&eacute;ro activit&eacute;</th>
                                 <th class="cell">Libell&eacute; activit&eacute;</th>
                                 <th class="cell">type activite</th>
-                                <th class="cell">Desription de l activit&eacute;</th>
-                                <th class="cell">Date debut activit&eacute;</th>
-                                <th class="cell">Date fin  activit&eacute;</th>
-                                <th class="cell">Statut activit&eacute;</th>
-                                <th class="cell">Etat activit&eacute;</th>
+                                <th class="cell">Description</th>
+                                <th class="cell">Date de début de l'activit&eacute;</th>
+                                <th class="cell">Date limite </th>
+                                <th class="cell">Statut de l'activit&eacute;</th>
+                                <th class="cell">Libell&eacute; critique</th>
+                                <th class="cell">Date de debut temps critique</th>
+                                <th class="cell">Date de fin temps critique</th>
+                                <th class="cell">&eacute;tat</th>
 
                             </tr>
                         </thead>
                         <tbody>
 
 
-                            @forelse ($Activiteinactif as $Activiteinactifs)
+                            @forelse ($TmpActInactif as $TmpActInactifs)
 
                             <tr>
-                                <td class="cell">{{ $Activiteinactifs->code_activite }}</td>
-                                <td class="cell">{{ $Activiteinactifs->lib_act }}</td>
-                                <td class="cell">{{ $Activiteinactifs->libelle_activite }}</td>
-                                <td class="cell">{{ $Activiteinactifs->description }}</td>
-                                <td class="cell">{{ $Activiteinactifs->date_deb}}</td>
-                                <td class="cell">{{ $Activiteinactifs->datefin }}</td>
+                                <td class="cell">{{ $TmpActInactifs->code_act }}</td>
+                                <td class="cell">{{ $TmpActInactifs->lib_act }}</td>
+                                <td class="cell">{{ $TmpActInactifs->libelle_activite }}</td>
+                                <td class="cell">{{ $TmpActInactifs->description }}</td>
+                                <td class="cell">{{ $TmpActInactifs->date_deb }}</td>
+                                <td class="cell">{{ $TmpActInactifs->datefin}}</td>
 
 
 
-                                @if($Activiteinactifs->statutac =="1")
+
+                                {{-- <td class="cell">{{ $TmpActInactifs->statutac }}</td> --}}
+
+
+
+                                @if($TmpActInactifs->statutac =="1")
 
                                 <td class="cell">
                                 <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
@@ -209,7 +230,7 @@
                                   </dd>
                                 </td>
 
-                                @elseif ($Activiteinactifs->statutac =="2")
+                                @elseif ($TmpActInactifs->statutac =="2")
                                 <td class="cell">
                                     <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -219,7 +240,7 @@
                                       </dd>
                                 </td>
 
-                                  @elseif ($Activiteinactifs->statutac =="0")
+                                  @elseif ($TmpActInactifs->statutac =="0")
 
                                   <td class="cell">
                                     <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
@@ -232,14 +253,20 @@
 
                                 @endif
 
+                                <td class="cell">{{ $TmpActInactifs->lib_crit }}</td>
+
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActInactifs->date_deb_crit)->format('d/m/y') }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActInactifs->date_fin_crit)->format('d/m/y') }}</td>
 
 
-                                @if($Activiteinactifs->etatac =="1")
-                                <td class="cell"><span class="badge bg-success">Actif</span></td>
+                                @if($TmpActInactifs->etatcrip =="1" )
+
+                               <td class="cell"><span class="badge bg-success">Inactif</span></td>
+
 
                                 @else
 
-                                <td class="cell"><span class="badge bg-danger">Inactif</span></td>
+                               <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
 
                             </tr>
@@ -247,11 +274,13 @@
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="6">Aucune Activit&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucun temps critique attribu&eacute;</td>
 
                             </tr>
 
                             @endforelse
+
+
 
                         </tbody>
                     </table>
