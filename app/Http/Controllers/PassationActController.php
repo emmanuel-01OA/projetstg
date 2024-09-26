@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PassationActController extends Controller
 {
+
+    private $filePath = 'activites.json';
+
     //
     public function indexMespassations(){
+
 
 
         // les états de validation de demande de passation
@@ -343,12 +348,107 @@ class PassationActController extends Controller
 
           public function postuserPassation(Request $request){
 
-     // mon matricule utilisateur   ($matricul->matrcl)
-     $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
 
-   // activitep , Descrip , libellepassation , descrippasst , pourcenteff , libproj
+   try{
+
+        // mon matricule utilisateur   ($matricul->matrcl)
+        $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+        // activitep , Descrip , libellepassation , descrippasst , pourcenteff , libproj
+
+        $validator = Validator::make($request->all(), [
+
+       // 'activitep' => 'required|date|before:datefin',
+        // 'datefin' => 'required|date|after:datedeb',
+      //  'datedmd' => 'required|date',
+        'activitep' => 'required|string',
+        'Descrip' => 'required|string',
+        'libellepassation' => 'required|string',
+        'descrippasst' => 'required|string',
+        'pourcenteff'=> 'required|string',
+        'libproj'=> 'required|string'
+          ]);
+
+// dd($request->libproj);
+ $matriculback = DB::select('select * from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
 
 
+// $matriculback = DB::table('dtbdesign_bak_mang')->where('matrcl_pers ',[ $matricul->matrcl ])->first() ;
+
+// dd(  $matriculback);
+
+ $matriculman = DB::select('select matrcl_man from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+
+
+
+//  foreach ($matriculback as $matriculbacks) {
+//     dd($matriculbacks->matrcl_back);
+// }
+//$activite['datedmd'] = now(); // Ajoutez la date actuelle
+
+
+if ($validator->fails()) {
+
+    return redirect()->back()->withErrors($validator)->withInput();
+}
+
+
+
+$tblpass = DB::table('tbldmdpasst')->insert([
+
+'matrcl' => $matricul->matrcl,
+'code_activite' => $request->activitep,
+'libpasst'=> $request->libellepassation,
+'pourcen_travail_eff'=> $request->pourcenteff,
+'etatd' => 1,  // demande en attente
+'attach' => null,
+'descption' => $request->descrippasst
+
+  ]);
+
+$tbldppasid = DB::select('select idpasst from tbldmdpasst where matrcl = ? and code_activite = ? and libpasst = ? and descption = ?', [ $matricul->matrcl ,$request->activitep , $request->libellepassation , $request->descrippasst]);
+//   $tblpass = DB::table('tbldmdpasst')->insert([
+//dd($tbldppasid );
+//     'matrcl' => $request->matrcl,
+//     'code_activite' => $request->l,
+
+// 'libpasst'=> $request->l,
+// 'pourcen_travail_eff'=> $request->l,
+// 'datedmd' => $request->l,
+// 'description' => $request->l,
+// 'etatd' => $request ->l ,
+// 'attach' => $request ->
+
+$tblpassTblvalid = DB::table('tbldmdpasst')->insert([
+
+    'matrcl_back' => $matricul->matrcl,
+    'idpasst' => $tbldppasid,
+    'matrclman' =>  $matriculman,
+    'idvalid'=> 1,
+    'etatpassman'=> 1,
+    'etatpassbackup' => 1, // en attente
+    'etatv' => 1,  // validation eest en attente
+
+      ]);
+// dd($matricul);
+// ]);
+
+// $tempscritique = DB::table('tbldmdpasst')->insert([
+
+//     'code_act' => $request->activity,
+//     'lib_crit' => $request->libAct,
+//     'date_deb_crit' => $request->datedeb,
+//     'date_fin_crit' => $request->datefin,
+//     'etatcrip' => 1
+// ]);
+
+notyf("Ajout des informations de la passation effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+
+return redirect()->back();
+
+          }catch(Exception $exp){
+
+//dd($exp);
           }
 
 
@@ -356,6 +456,9 @@ class PassationActController extends Controller
            ///
 
 
+
+
+    }
 
            // validation des parametres des passations
           public function AccepterPassationMan(Request $request, $id){

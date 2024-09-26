@@ -20,9 +20,15 @@
 
     @vite('resources/js/app.js')
     <!-- FontAwesome JS-->
+
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
-    
+    <script src="{{ asset('assets/js/chartJS.js') }}"></script>
+
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">

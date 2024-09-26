@@ -14,7 +14,7 @@
     <a class="tw-text-white tw-bg-red-700  hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800" href="{{ route('mescongesuser.create') }}" style="color: beige">Faire une planification congés</a>
    </div>
 
-   
+
     <div class="col-auto">
          <div class="page-utilities">
             <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
@@ -67,7 +67,10 @@
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
         </div>
 
-        @foreach ($tblperinfocg as $tblperinfocg)
+        @forelse ($tblperinfocg as $tblperinfocg)
+
+
+        {{-- @foreach ($tblperinfocg as $tblperinfocg) --}}
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
             <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congé totale : </dd>
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">{{ $tblperinfocg->taux_conges   }}</dt>
@@ -104,8 +107,49 @@
         </div>
 
 
+        @empty
 
-        @endforeach
+         {{-- @foreach ($tblperinfocg as $tblperinfocg) --}}
+         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congé totale : </dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"> - </dt>
+
+        </div>
+
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Nom et prénom :</dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"> - </dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400"></dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congés restant</dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"> - </dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400"></dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400"></dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Ann&eacute;e</dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">2024</dt>
+        </div>
+        <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400"></dd>
+            <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
+        </div>
+
+
+        @endforelse
+
+
+        {{-- @endforeach --}}
 
         {{-- <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">1B+</dt>
@@ -170,24 +214,56 @@
                             <tr>
                                 <th class="cell ">ID</th>
                                 <th class="cell ">description</th>
+                                <th class="cell ">Taux congés</th>
                                 <th class="cell ">date d&eacute;but </th>
                                 <th class="cell ">date fin</th>
+                                <th class="cell ">Statut</th>
+
                                 <th class="cell ">Etat</th>
+                                <th class="cell text-center" >Action(s)</th>
 
                             </tr>
                         </thead>
                         <tbody>
 
 
-                            {{-- @forelse ($ as $)
+                             @forelse ($planifcg as $planifcg )
 
                             <tr>
-                                <td class="cell">{{ $fonctions->code_fonct }}</td>
-                                <td class="cell" colspan="50" ></td>
-                                <td class="cell" colspan="50"></td>
-                                <td class="cell"><span class="truncate">{{ $fonctions->libelle_fonct }}</span></td>
 
-                                @if($fonctions->etatf =="1" )
+                                <td class="cell" >{{ $planifcg->id_p }}</td>
+                                <td class="cell">{{ $planifcg->lbelle_conges }}</td>
+                                <td class="cell">{{ $planifcg->taux_plcg }}</td>
+                                <td class="cell">{{ $planifcg->date_depart }}</td>
+                                <td class="cell">{{ $planifcg->date_arrive }}</td>
+
+                                @if($planifcg->etatvalidpl =="1" )
+                                <td class="cell"><span class="badge bg-warning">En Attente</span></td>
+
+
+                                @elseif ($planifcg->etatvalidpl =="2" )
+
+                                <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+
+
+                                @elseif ($planifcg->etatvalidpl =="0" )
+
+                                <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+
+
+                                @else
+
+                                <td class="cell text-center">Aucun statut</td>
+
+                                @endif
+
+
+
+
+
+
+
+                                @if($planifcg->etatf =="1" )
                                 <td class="cell"><span class="badge bg-success">Actif</span></td>
 
 
@@ -196,15 +272,38 @@
                                 <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
 
+
+
+
+
+
+                                <td class="cell">
+
+                                    <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                                        Modifier </a>
+                                        {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+
+                                </td>
+
+                              <td class="cell">
+
+                                <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
+{{--
+                                    @include('collab.passation.modaledecision.modalRefdmdpass') --}}
+                             </td>
+
+
+
                             </tr>
 
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="20">Aucune plannification de cong&eacute;(s) enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune plannification de cong&eacute;(s) enregistr&eacute;</td>
                             </tr>
 
-                            @endforelse --}}
+                            @endforelse
 
 
 
@@ -237,46 +336,101 @@
 
                     <table class="table mb-0 text-left">
                         <thead>
-                               <tr>
+                            <tr>
+                                <th class="cell ">ID</th>
+                                <th class="cell ">description</th>
+                                <th class="cell ">Taux congés</th>
+                                <th class="cell ">date d&eacute;but </th>
+                                <th class="cell ">date fin</th>
+                                <th class="cell ">Statut</th>
 
-                                    <th class="cell">ID</th>
-                                    <th class="cell">description</th>
-                                    <th class="cell">date d&eacute;but </th>
-                                    <th class="cell">date fin</th>
-                                    <th class="cell" colspan="20">Etat</th>
+                                <th class="cell ">Etat</th>
+                                <th class="cell text-center">Action(s)</th>
 
-                               </tr>
+                            </tr>
                         </thead>
                         <tbody>
 
 
-                            {{-- @forelse ($fonctionin as $fonctions)
+                             @forelse ($planifcgval as $planifcg )
 
                             <tr>
-                                <td class="cell">{{ $fonctions->code_fonct }}</td>
 
-                                <td class="cell" colspan="50"></td>
-                                <td class="cell" colspan="50"></td>
-                                <td class="cell"colspan="50"><span class="truncate">{{ $fonctions->libelle_fonct }}</span></td>
+                                <td class="cell" >{{ $planifcgval->id_p }}</td>
+                                <td class="cell">{{ $planifcgval->lbelle_conges }}</td>
+                                <td class="cell">{{ $planifcgval->taux_plcg }}</td>
+                                <td class="cell">{{ $planifcgval->date_depart }}</td>
+                                <td class="cell">{{ $planifcgval->date_arrive }}</td>
 
-                                @if($fonctions->etatf =="1")
+                                @if($planifcgval->etatvalidpl =="1" )
+                                <td class="cell"><span class="badge bg-warning">En Attente</span></td>
+
+
+                                @elseif ($planifcgval->etatvalidpl =="2" )
+
+                                <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+
+
+                                @elseif ($planifcgval->etatvalidpl =="0" )
+
+                                <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+
+
+                                @else
+
+                                <td class="cell text-center">Aucun statut</td>
+
+                                @endif
+
+
+
+
+
+
+
+                                @if($planifcgval->etatf =="1" )
                                 <td class="cell"><span class="badge bg-success">Actif</span></td>
+
 
                                 @else
 
                                 <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
 
+
+
+
+
+
+                                <td class="cell" >
+
+                                    <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                                        Modifier </a>
+                                        {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+
+                                </td>
+
+                              <td class="cell">
+
+                                <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
+{{--
+                                    @include('collab.passation.modaledecision.modalRefdmdpass') --}}
+                             </td>
+
+
+
                             </tr>
 
                             @empty
 
                             <tr>
-                                <td class="cell justify-content-center" colspan="6">Aucune fonction enregistr&eacute;</td>
-
+                                <td class="cell text-center" colspan="20">Aucune planification de cong&eacute;(s) enregistr&eacute;</td>
                             </tr>
 
-                            @endforelse --}}
+                            @endforelse
+
+
 
                         </tbody>
                     </table>
@@ -308,48 +462,104 @@
                 <div class="table-responsive">
                     <table class="table mb-0 text-left">
                         <thead>
-                            <tr>
-                                <th class="cell">ID</th>
-                                <th class="cell">description</th>
-                                <th class="cell">date d&eacute;but </th>
-                                <th class="cell">date fin</th>
-                                <th class="cell" colspan="20">Etat</th>
+                            <thead>
+                                <tr>
+                                    <th class="cell ">ID</th>
+                                    <th class="cell ">description</th>
+                                    <th class="cell ">Taux congés</th>
+                                    <th class="cell ">date d&eacute;but </th>
+                                    <th class="cell ">date fin</th>
+                                    <th class="cell ">Statut</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                                    <th class="cell ">Etat</th>
+                                    <th class="cell text-center" >Action(s)</th>
 
-
-                            {{-- @forelse ($dmdpasstRefuser  as $dmdpasstRefuse )
-
-                            <tr>
-
-                                <td class="cell">{{ $dmdpasstRefuse->idpasst }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->code_activite }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->description }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->libpasst }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->datedmd }}</td>
-
-                                @if($dmdpasstRefuse->etatd == $etatRefuser)
-                                <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
-
-                                @endif
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
+                                 @forelse ($planifcgref as $planifcg )
 
-                            </tr>
+                                <tr>
 
-                            @empty
+                                    <td class="cell" >{{ $planifcgref->id_p }}</td>
+                                    <td class="cell">{{ $planifcgref->lbelle_conges }}</td>
+                                    <td class="cell">{{ $planifcgref->taux_plcg }}</td>
+                                    <td class="cell">{{ $planifcgref->date_depart }}</td>
+                                    <td class="cell">{{ $planifcgref->date_arrive }}</td>
 
-                            <tr>
-                                <td class="cell text-center" colspan="6">Aucune passation enregistr&eacute;e </td>
+                                    @if($planifcgref->etatvalidpl =="1" )
+                                    <td class="cell"><span class="badge bg-warning">En Attente</span></td>
 
-                            </tr>
 
-                            @endforelse --}}
+                                    @elseif ($planifcgref->etatvalidpl =="2" )
 
-                        </tbody>
+                                    <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+
+
+                                    @elseif ($planifcgref->etatvalidpl =="0" )
+
+                                    <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+
+
+                                    @else
+
+                                    <td class="cell text-center">Aucun statut</td>
+
+                                    @endif
+
+
+
+
+
+
+
+                                    @if($planifcgref->etatf =="1" )
+                                    <td class="cell"><span class="badge bg-success">Actif</span></td>
+
+
+                                    @else
+
+                                    <td class="cell"><span class="badge bg-danger">Inactif</span></td>
+                                    @endif
+
+
+
+
+
+
+                                    <td class="cell">
+
+                                        <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                                            Modifier </a>
+                                            {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+
+                                    </td>
+
+                                  <td class="cell">
+
+                                    <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
+    {{--
+                                        @include('collab.passation.modaledecision.modalRefdmdpass') --}}
+                                 </td>
+
+
+
+                                </tr>
+
+                                @empty
+
+                                <tr>
+                                    <td class="cell text-center" colspan="20">Aucune planification de cong&eacute;(s) enregistr&eacute;</td>
+                                </tr>
+
+                                @endforelse
+
+
+
+                            </tbody>
                     </table>
                 </div><!--//table-responsive-->
             </div><!--//app-card-body-->

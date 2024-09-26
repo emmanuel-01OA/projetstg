@@ -310,7 +310,7 @@ Route::prefix('activite/Attrib-backup')->group(function () {
 
 
 
-Route::prefix('activite/VisualisationConges')->group(function () {
+Route::prefix('conges/VisualisationConges')->group(function () {
 
     Route::get('/', [DataCongesController::class, 'indexVisualisationConges'])->name('VisualisationConges.index');
 

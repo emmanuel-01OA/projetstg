@@ -30,6 +30,9 @@ class CongesController extends Controller
 
 
 
+            $matriculman = DB::select('select matrcl_man from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+
+
 
             $Request->validate([
 
@@ -132,12 +135,42 @@ class CongesController extends Controller
         ])
         ->get();
 
+        // congés valide
+        $cgval = 2;
+        $cgref = 0;
+
+        $planifcgval = DB::table('planifier')
+        ->join('tblcg', 'planifier.idcg','=','tblcg.idcg')
+        ->select('planifier.*','tblcg.*')
+        ->where([
+            ['planifier.matrcl', '=', $matricul->matrcl ],
+            ['planifier.etatvalidpl', '=', $cgval ],
+
+        ])
+        ->get();
+
+
+
+        $planifcgref = DB::table('planifier')
+        ->join('tblcg', 'planifier.idcg','=','tblcg.idcg')
+        ->select('planifier.*','tblcg.*')
+        ->where([
+            ['planifier.matrcl', '=', $matricul->matrcl ],
+            ['planifier.etatvalidpl', '=', $cgref ],
+
+        ])
+        ->get();
+
+
+       // dd($planifcgref);
+
+
        // dd($tblperinfocg);
         // $fonction = DB::select('select * from tblfonc where etatf = ?', [1]);
         // $fonctionin = DB::select('select * from tblfonc where etatf = ?', [0]);
 
 
-        return view('collab.conges.indexcg', compact('matricul','conge', 'planifcg','tblperinfocg'));
+        return view('collab.conges.indexcg', compact('matricul','conge', 'planifcg','tblperinfocg','planifcgref','planifcgval'));
     }
 
 
@@ -145,6 +178,9 @@ class CongesController extends Controller
 
         // A parametrer
         $etatp = 1;
+
+        // conges valide
+        $statutValidConge = 1;
         $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
 
         //    $matricul = DB::select('select matrcl from tblper where tblper.eml = ?', [auth()->user()->email]);
@@ -162,6 +198,8 @@ class CongesController extends Controller
              ->select('*')
              ->where([
                 ['tblper.etatp', '=', $etatp] ,
+                ['planifier.etatvalidpl','=', $statutValidConge ]
+
 
                 ])->get();
 
@@ -175,7 +213,72 @@ class CongesController extends Controller
 
     public function indexDemCongespersonnel(){
 
-     return view('managerviews.congesviews.Demandecongepersonnel.demandconge');
+        // statut de la demande de congés en Attente
+        $StatutAttentdmdcg = 1;
+
+        //statut de la demande de congé validé
+        $StatutValidedmdcg = 2;
+
+        // statut de la demande de congés refusé
+        $StatutRefdmdcg = 0 ;
+        // loin pour l'utilisateur concernant le login
+
+        $etatp = 1;
+        $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+        $matriculman = DB::select('select matrcl_man from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+
+
+  //      $Conge = DB::table('users')->;
+
+        $Dconges = DB::table('tblper')
+        ->join('tblperdcg','tblperdcg.matrcl','=','tblper.matrcl')
+        ->join('planifier','planifier.matrcl','=','tblper.matrcl')
+        ->join('tblfonc','tblfonc.code_fonct','=','tblper.code_fonct')
+        ->join('tblstentrp','tblstentrp.code_statut', '=','tblper.code_statut')
+        ->select('*')
+        ->where([
+           ['tblper.etatp', '=', $etatp] ,
+           ['planifier.etatvalidpl','=', $StatutAttentdmdcg ]
+
+           ])->get();
+
+// dd($Dconges);
+
+$DcongesVal = DB::table('tblper')
+->join('tblperdcg','tblperdcg.matrcl','=','tblper.matrcl')
+->join('planifier','planifier.matrcl','=','tblper.matrcl')
+->join('tblfonc','tblfonc.code_fonct','=','tblper.code_fonct')
+->join('tblstentrp','tblstentrp.code_statut', '=','tblper.code_statut')
+->select('*')
+->where([
+   ['tblper.etatp', '=', $etatp] ,
+   ['planifier.etatvalidpl','=', $StatutValidedmdcg ]
+
+   ])->get();
+
+
+   ///
+   ///
+   ///
+
+
+$DcongeRef = DB::table('tblper')
+->join('tblperdcg','tblperdcg.matrcl','=','tblper.matrcl')
+->join('planifier','planifier.matrcl','=','tblper.matrcl')
+->join('tblfonc','tblfonc.code_fonct','=','tblper.code_fonct')
+->join('tblstentrp','tblstentrp.code_statut', '=','tblper.code_statut')
+->select('*')
+->where([
+   ['tblper.etatp', '=', $etatp] ,
+   ['planifier.etatvalidpl','=', $StatutRefdmdcg ]
+
+   ])->get();
+
+   ///
+   ///
+   ///
+     return view('managerviews.congesviews.Demandecongepersonnel.demandconge', compact('Dconges' , 'StatutAttentdmdcg' , 'StatutValidedmdcg' , 'StatutRefdmdcg'));
 
     }
 

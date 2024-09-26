@@ -50,7 +50,7 @@
                     <table class="table app-table-hover mb-0 text-left">
                         <thead>
                             <tr>
-                                <th class="cell">code Demande</th>
+                                <th class="cell">Demande N </th>
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
                                 <th class="cell">Pr&eacute;nom</th>
@@ -72,34 +72,31 @@
                          <tbody>
 
 
-                            {{-- @forelse ($ActivitpassAttente as $CongesVars )
+                                @forelse ($Dconges as $CongesDAtt )
 
                             <tr>
-                                <td class="cell">{{ $CongesVars->idpasst }}</td>
-                                <td class="cell">{{ $CongesVars->code_activite }}</td>
-                                <td class="cell">{{ $CongesVars->libelle_activite }}</td>
-                                <td class="cell">{{ $CongesVars->description }}</td>
-                                <td class="cell">{{ $CongesVars->libpasst }}</td>
-                                <td class="cell">{{ $CongesVars->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $CongesVars->matrcl }}</td>
-                                <td class="cell">{{ $CongesVars->nam }}</td>
-                                 <td class="cell">{{ $CongesVars->renam }}</td>
-                                 <td class="cell">{{ $CongesVars->eml }}</td>
-                                 <td class="cell">{{ $CongesVars->datedmd }}</td>
-                                 <td class="cell">{{ $CongesVars->date_debut }}</td>
-                                 <td class="cell">{{ $CongesVars->date_fin }}</td>
+                                <td class="cell">{{ $CongesDAtt->matrcl }}</td>
+                                <td class="cell">{{ $CongesDAtt->nam }}</td>
+                                <td class="cell">{{ $CongesDAtt->renam }}</td>
+                                <td class="cell">{{ $CongesDAtt->eml }}</td>
+                                <td class="cell">{{ $CongesDAtt->conta }}</td>
+                                <td class="cell">{{ $CongesDAtt->type_statut }}</td>
+                                <td class="cell">{{ $CongesDAtt->libelle_fonct }}</td>
+                                <td class="cell">{{ $CongesDAtt->date_depart }}</td>
+                                <td class="cell">{{ $CongesDAtt->date_arrive }}</td>
+                                {{-- <td class="cell">{{ $CongesDAtt->etatvalidpl }}</td> --}}
 
 
-                                @if($CongesVars->etatpassman == $StatutAttentepassMan)
+                                @if($CongesDAtt->etatvalidpl == $StatutAttentdmdcg )
                                 <td class="cell"><span class="badge bg-warning">En Attente </span></td>
 
                                 @endif
 
                                 <td class="cell">
 
-                                    <a href="#addnew" data-bs-toggle="modal" data-bs-target="#addnew" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 tw-rounded-lg dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+                                    <a href="#addnew" data-bs-toggle="modal" data-bs-target="#addnew" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
 
-                                        @include('managerviews.Demandepassation.modaledmdacc')
+                                        {{-- @include('managerviews.Demandepassation.modaledmdacc') --}}
                                       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
                                            <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
@@ -116,11 +113,11 @@
                                         <td class="cell">
 
 
-                                    <a href="#edit{{ $CongesVars->idpasst }}" data-bs-toggle="modal"  data-bs-target="#edit" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+                                    <a href="#edit{{ $CongesDAtt->id_p }}" data-bs-toggle="modal"  data-bs-target="#edit" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
 
                                         Accepter</a>
 
-                                        @include('managerviews.Demandepassation.modaledmdaccp')
+                                        {{-- @include('managerviews.Demandepassation.modaledmdaccp') --}}
 
                                     </td>
 
@@ -129,12 +126,8 @@
 
                                     <a href="#editrefus" data-bs-toggle="modal"  data-bs-target="#editrefus" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Refuser</a>
 
-                                    @include('managerviews.Demandepassation.modaleRefdmdpass')
+                                    {{-- @include('managerviews.Demandepassation.modaleRefdmdpass') --}}
                                 </td>
-
-
-
-
 
                             </tr>
 
@@ -146,14 +139,15 @@
                             </tr>
 
                             @endforelse
- --}}
 
 
                         </tbody>
 
 
                     </table>
-                </div><!--//table-responsive-->
+                </div>
+
+                <!--//table-responsive-->
 
             </div><!--//app-card-body-->
 
@@ -207,21 +201,19 @@
                     <table class="table mb-0 text-left">
                         <thead>
                             <tr>
-                                <th class="cell">ID</th>
-                                <th class="cell">Code activit&eacute;</th>
-                                <th class="cell">Type activite</th>
-                                <th class="cell">Description</th>
-                                <th class="cell">Libell&eacute; passation</th>
-                                <th class="cell">Estimation pourcentage &eacute;ffectu&eacute;</th>
+                                <th class="cell">Demande N</th>
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
-                                <th class="cell">Pr&eacute;nom(s)</th>
+                                <th class="cell">Pr&eacute;nom</th>
                                 <th class="cell">Email</th>
-                                <th class="cell">date demande</th>
+                                <th class="cell">fonction</th>
+                                <th class="cell">Statut entreprise</th>
+                                <th class="cell">Fonction</th>
+                                <th class="cell">type de cong&eacute;</th>
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
                                 <th class="cell">&eacute;tat passation</th>
-
+                               <th class="cell text-center" colspan="70">Action(s)</th>
 
 
                             </tr>
@@ -230,47 +222,49 @@
 
                          <tbody>
 
-{{--
-                            @forelse ($CongesVar as $CongesVars )
+
+                            @forelse ($Dconges as $CongesValid )
 
                             <tr>
-                                <td class="cell">{{ $CongesVars->idpasst }}</td>
-                                <td class="cell">{{ $CongesVars->code_activite }}</td>
-                                <td class="cell">{{ $CongesVars->libelle_activite }}</td>
-                                <td class="cell">{{ $CongesVars->description }}</td>
-                                <td class="cell">{{ $CongesVars->libpasst }}</td>
-                                <td class="cell">{{ $CongesVars->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $CongesVars->matrcl }}</td>
+                                <td class="cell">{{ $CongesValid->matrcl }}</td>
+                                <td class="cell">{{ $CongesValid->nam }}</td>
+                                <td class="cell">{{ $CongesValid->renam }}</td>
+                                <td class="cell">{{ $CongesValid->eml }}</td>
+                                <td class="cell">{{ $CongesValid->conta }}</td>
+                                <td class="cell">{{ $CongesValid->type_statut }}</td>
+                                <td class="cell">{{ $CongesValid->libelle_fonct }}</td>
+                                <td class="cell">{{ $CongesValid->date_depart }}</td>
+                                 <td class="cell">{{ $CongesValid->date_arrive }}</td>
 
-                                <td class="cell">{{ $CongesVars->nam }}</td>
-                                <td class="cell">{{ $CongesVars->renam }}</td>
-                                <td class="cell">{{ $CongesVars->eml }}</td>
-                                <td class="cell">{{ $CongesVars->datedmd }}</td>
-                                <td class="cell">{{ $CongesVars->date_debut }}</td>
-                                <td class="cell">{{ $CongesVars->date_fin }}</td>
-
-
-                                @if($CongesVars->etatpassman == $StatutValpassMan )
-                                <td class="cell"><span class="badge bg-success">Valid&eacute; </span></td>
+                                @if($CongesValid->etatvalidpl == $StatutValidedmdcg )
+                                <td class="cell"><span class="badge bg-warning">Valid&eacute;e </span></td>
 
                                 @endif
 
+                                <td class="cell">
 
-
+                                    <a href="#addnew" data-bs-toggle="modal" data-bs-target="#addnew" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+                                        {{-- @include('managerviews.Demandepassation.modaledmdacc') --}}
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
+                                           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                                       </svg>
+                                       Voir
+                                     </a>
+                                 </td>
                             </tr>
 
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="20">Aucune passation valid&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation enregistr&eacute;</td>
 
                             </tr>
 
-                            @endforelse --}}
-
-
-
+                            @endforelse
                         </tbody>
+
+
 
 
                     </table>
@@ -307,69 +301,71 @@
                     <table class="table mb-0 text-left">
                         <thead>
                             <tr>
-                                <th class="cell">ID</th>
-                                <th class="cell">Code activit&eacute;</th>
-                                <th class="cell">Type activite</th>
-                                <th class="cell">Description</th>
-                                <th class="cell">Libell&eacute; passation</th>
-                                <th class="cell">Estimation pourcentage &eacute;ffectu&eacute;</th>
+                                <th class="cell">code Demande</th>
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
-                                <th class="cell">Pr&eacute;nom(s)</th>
+                                <th class="cell">Pr&eacute;nom</th>
                                 <th class="cell">Email</th>
-                                <th class="cell">date demande</th>
+                                <th class="cell">Fonction</th>
+                                <th class="cell">Statut entreprise</th>
                                 <th class="cell">Date de debut </th>
                                 <th class="cell">Date de fin </th>
-                                <th class="cell">&eacute;tat passation</th>
-
-
-
+                                <th class="cell">&eacute;tat du cong&eacute;</th>
+                               <th class="cell text-center" colspan="70">Action(s)</th>
                             </tr>
                         </thead>
 
-                        <tbody>
+
+                         <tbody>
 
 
-                            {{-- @forelse ($ActivitpassRefuser as $ActivitpasstRefuser )
+                            @forelse ($Dconges as $Dconges )
 
                             <tr>
-                                <td class="cell">{{ $ActivitpasstRefuser->idpasst }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->code_activite }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->libelle_activite }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->description }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->libpasst }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->matrcl }}</td>
-
-                                <td class="cell">{{ $ActivitpasstRefuser->nam }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->renam }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->eml }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->datedmd }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->date_debut }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->date_fin }}</td>
+                                <td class="cell">{{ $Dconges->matrcl }}</td>
+                                <td class="cell">{{ $Dconges->nam }}</td>
+                                <td class="cell">{{ $Dconges->renam }}</td>
+                                <td class="cell">{{ $Dconges->eml }}</td>
+                                <td class="cell">{{ $Dconges->conta }}</td>
+                                <td class="cell">{{ $Dconges->type_statut }}</td>
+                                <td class="cell">{{ $Dconges->libelle_fonct }}</td>
+                                <td class="cell">{{ $Dconges->date_depart }}</td>
+                                 <td class="cell">{{ $Dconges->date_arrive }}</td>
 
 
-                                @if($ActivitpasstRefuser->etatpassman == $StatutRefpassMan )
-                                <td class="cell"><span class="badge bg-danger">Refus&eacute; </span></td>
+                                @if($Dconges->etatvalidpl == $StatutRefdmdcg )
+                                <td class="cell"><span class="badge bg-warning">En Attente </span></td>
 
                                 @endif
 
+                                <td class="cell">
 
+                                    <a href="#addnew" data-bs-toggle="modal" data-bs-target="#addnew" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+
+                                        {{-- @include('managerviews.Demandepassation.modaledmdacc') --}}
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
+                                           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                                       </svg>
+                                     Voir
+
+                                     </a>
+
+                                 </td>
 
                             </tr>
 
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="20">Aucune passation refus&eacute;e</td>
+                                <td class="cell text-center" colspan="20">Aucune passation enregistr&eacute;</td>
 
                             </tr>
 
                             @endforelse
 
- --}}
-
                         </tbody>
+
 
 
                     </table>

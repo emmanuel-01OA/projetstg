@@ -81,6 +81,8 @@
                                 <td class="cell">{{ $attribbackups->nomback }}</td>
                                 <td class="cell">{{ $attribbackups->renomback }}</td>
                                 <td class="cell">{{ $attribbackups->fonction_back_libelle }}</td>
+
+                                
                             </tr>
                         @empty
                             <tr>

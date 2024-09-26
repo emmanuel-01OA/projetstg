@@ -137,14 +137,11 @@
                 </div>
 
                 <div class="tw-w-full">
-                    <label for="message" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description :</label>
-                    <textarea id="message" name="descrippasst" rows="4" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-lg tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" required></textarea>
+                    <label for="descrippasst" class="tw-block tw-mb-4 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">Description :</label>
+                    <textarea id="descrippasst" name="descrippasst" rows="4" class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-lg tw-rounded-lg focus:tw-ring-red-600 focus:tw-border-red-600 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:focus:tw-ring-red-500 dark:focus:tw-border-red-500" required></textarea>
                 </div>
 
-
                 <div class="col-auto tw-mx-auto">
-
-
                     <button type="submit" class="tw-text-white tw-bg-red-700 hover:bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">Faire la demande</button>
                 </div>
 
@@ -155,27 +152,6 @@
         </form>
     </div>
   </section>
-
-
-
-
-{{-- <div class="tab-content" id="orders-table-tab-content">
-    <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-        <div class="app-card app-card-orders-table shadow-sm mb-5">
-            <div class="app-card-body">
-
-
-
-
-
-            </div><!--//app-card-body-->
-        </div><!--//app-card-->
-
-    </div><!--//tab-pane-->
-
-
-</div><!--//tab-content--> --}}
-
 
 
 

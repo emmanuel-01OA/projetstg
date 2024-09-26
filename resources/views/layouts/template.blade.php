@@ -14,6 +14,12 @@
 
     <!-- configurer taiwind CSS -->
     @vite('resources/css/app.css')
+
+    @vite('resources/js/app.js')
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+    <script src="{{ asset('assets/js/chartJS.js') }}"></script>
+
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 

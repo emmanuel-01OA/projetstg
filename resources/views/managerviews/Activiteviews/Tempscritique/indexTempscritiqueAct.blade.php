@@ -87,8 +87,8 @@
                                 <td class="cell">{{ $TmpActactifs->lib_act }}</td>
                                 <td class="cell">{{ $TmpActactifs->libelle_activite }}</td>
                                 <td class="cell">{{ $TmpActactifs->description }}</td>
-                                <td class="cell">{{ $TmpActactifs->date_deb }}</td>
-                                <td class="cell">{{ $TmpActactifs->datefin}}</td>
+                                <td class="cell">{{  \Carbon\Carbon::parse($TmpActactifs->date_deb)->format('d/m/y') }}</td>
+                                <td class="cell">{{  \Carbon\Carbon::parse($TmpActactifs->datefin)->format('d/m/y') }}</td>
 
 
                                 @if($TmpActactifs->statutac =="1")

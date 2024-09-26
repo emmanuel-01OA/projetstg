@@ -42,11 +42,6 @@
 
       <div class="tw-items-center tw-justify-center tw-space-y-4 sm:tw-flex sm:tw-space-y-0 sm:tw-space-x-4 rtl:tw-space-x-reverse">
 
-
-
-        <canvas id="activityChart" width="1000" height="500"></canvas>
-
-
 {{--
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -99,6 +94,54 @@
         <div class="tw-w-full tw-p-4 tw-text-center tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow sm:tw-p-8 dark:tw-bg-gray-800 dark:tw-border-gray-700">
             <div class="tw-items-center tw-justify-center tw-space-y-4 sm:tw-flex sm:tw-space-y-0 sm:tw-space-x-4 rtl:tw-space-x-reverse">
 
+
+
+        <div class="container">
+            <h1>Visualisation des Congés par Mois</h1>
+            <canvas id="congesChart" width="400" height="200"></canvas>
+        </div>
+
+        <script>
+            const ctx = document.getElementById('congesChart').getContext('2d');
+            const congesChart = new Chart(ctx, {
+                type: 'bar', // Type de graphique
+                data: {
+                    labels: @json($months), // Labels (mois)
+                    datasets: [{
+                        label: 'Taux de congés calendaire',
+                        data: @json($counts), // Données (nombre de congés)
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Taux de Congés'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Mois'
+                            }
+                        }
+                    },
+
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        }
+                    }
+
+                }
+            });
+        </script>
 
 
 

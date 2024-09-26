@@ -79,6 +79,14 @@ public int $TmpActiviteInactif = 0 ;
               ]);
 
 
+              if($validator->fails()){
+
+                notyf("Echec de l'Ajout de l'activit&eacute; le code activité existe déja ",\Flasher\Prime\Notification\NotificationInterface::ERROR);
+
+
+           // return redirect()->back()->withErrors($validator)->withInput();
+              };
+
               $tempscritique = DB::table('tbdtcritq')->insert([
 
                 'code_act' => $request->activity,
@@ -93,7 +101,7 @@ public int $TmpActiviteInactif = 0 ;
 
 
        notyf("Ajout de la planification temps critique de l' activit&eacute; effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
-       return redirect()->route('LesActivites.index');
+       return redirect()->route('TempsCritiqActivites.index');
 
          }catch(Exception $excep){
 
