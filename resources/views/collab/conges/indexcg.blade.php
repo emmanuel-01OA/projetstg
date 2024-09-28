@@ -215,10 +215,9 @@
                                 <th class="cell ">ID</th>
                                 <th class="cell ">description</th>
                                 <th class="cell ">Taux congés</th>
-                                <th class="cell ">date d&eacute;but </th>
-                                <th class="cell ">date fin</th>
+                                <th class="cell ">date de d&eacute;but </th>
+                                <th class="cell ">date finale</th>
                                 <th class="cell ">Statut</th>
-
                                 <th class="cell ">Etat</th>
                                 <th class="cell text-center" >Action(s)</th>
 
@@ -237,18 +236,50 @@
                                 <td class="cell">{{ $planifcg->date_depart }}</td>
                                 <td class="cell">{{ $planifcg->date_arrive }}</td>
 
-                                @if($planifcg->etatvalidpl =="1" )
-                                <td class="cell"><span class="badge bg-warning">En Attente</span></td>
+                                @if($planifcg->etatvalidpl == 1 )
+                                <td class="cell">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                        </svg>
+
+                                        En cours
+                                    </dd>
 
 
-                                @elseif ($planifcg->etatvalidpl =="2" )
-
-                                <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+                                </td>
 
 
-                                @elseif ($planifcg->etatvalidpl =="0" )
+                                @elseif ($planifcg->etatvalidpl == 2 )
 
-                                <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+                                <td class="cell">
+
+                                    {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
+
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                        </svg>
+                                       Valid&eacute;
+                                      </dd>
+
+
+                                </td>
+
+
+                                @elseif ($planifcg->etatvalidpl == 0 )
+
+                                <td class="cell">
+
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                        </svg>
+                                       Refuser
+                                      </dd>
+
+
+                                </td>
 
 
                                 @else
@@ -340,8 +371,8 @@
                                 <th class="cell ">ID</th>
                                 <th class="cell ">description</th>
                                 <th class="cell ">Taux congés</th>
-                                <th class="cell ">date d&eacute;but </th>
-                                <th class="cell ">date fin</th>
+                                <th class="cell ">date de d&eacute;but </th>
+                                <th class="cell ">date finale</th>
                                 <th class="cell ">Statut</th>
 
                                 <th class="cell ">Etat</th>
@@ -352,7 +383,7 @@
                         <tbody>
 
 
-                             @forelse ($planifcgval as $planifcg )
+                             @forelse ($planifcgval as $planifcgval )
 
                             <tr>
 
@@ -362,20 +393,49 @@
                                 <td class="cell">{{ $planifcgval->date_depart }}</td>
                                 <td class="cell">{{ $planifcgval->date_arrive }}</td>
 
-                                @if($planifcgval->etatvalidpl =="1" )
-                                <td class="cell"><span class="badge bg-warning">En Attente</span></td>
+                                @if($planifcgval->etatvalidpl == 1 )
+
+                                <td class="cell">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                        </svg>
+
+                                        En cours
+                                    </dd>
 
 
-                                @elseif ($planifcgval->etatvalidpl =="2" )
+                                </td>
 
-                                <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+                                @elseif ($planifcgval->etatvalidpl == 2 )
+
+                                <td class="cell">
+
+                                    {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
+
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                        </svg>
+                                       Valid&eacute;
+                                      </dd>
 
 
-                                @elseif ($planifcgval->etatvalidpl =="0" )
+                                </td>
 
-                                <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+                                @elseif ($planifcgval->etatvalidpl == 0 )
+
+                                <td class="cell">
+
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                        </svg>
+                                       Refuser
+                                      </dd>
 
 
+                                </td>
                                 @else
 
                                 <td class="cell text-center">Aucun statut</td>
@@ -467,8 +527,8 @@
                                     <th class="cell ">ID</th>
                                     <th class="cell ">description</th>
                                     <th class="cell ">Taux congés</th>
-                                    <th class="cell ">date d&eacute;but </th>
-                                    <th class="cell ">date fin</th>
+                                    <th class="cell ">date de d&eacute;but </th>
+                                    <th class="cell ">date finale</th>
                                     <th class="cell ">Statut</th>
 
                                     <th class="cell ">Etat</th>
@@ -489,19 +549,51 @@
                                     <td class="cell">{{ $planifcgref->date_depart }}</td>
                                     <td class="cell">{{ $planifcgref->date_arrive }}</td>
 
-                                    @if($planifcgref->etatvalidpl =="1" )
-                                    <td class="cell"><span class="badge bg-warning">En Attente</span></td>
+                                    @if($planifcgref->etatvalidpl == 1 )
 
 
-                                    @elseif ($planifcgref->etatvalidpl =="2" )
 
-                                    <td class="cell"><span class="badge bg-succes">Valid&eacute;</span></td>
+                                     <td class="cell">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                        </svg>
+
+                                        En cours
+                                    </dd>
 
 
-                                    @elseif ($planifcgref->etatvalidpl =="0" )
+                                </td>
 
-                                    <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
+                                    @elseif ($planifcgref->etatvalidpl == 2 )
 
+                                    <td class="cell">
+
+                                        {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
+
+                                        <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
+                                            <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                            </svg>
+                                           Valid&eacute;
+                                          </dd>
+
+
+                                    </td>
+
+                                    @elseif ($planifcgref->etatvalidpl == 0 )
+
+                                    <td class="cell">
+
+                                        <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                            <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                            </svg>
+                                           Refuser
+                                          </dd>
+
+
+                                    </td>
 
                                     @else
 

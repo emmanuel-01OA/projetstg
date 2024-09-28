@@ -103,7 +103,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     Route::get('/dashboard', [AppController::class, 'user'])->name('dashboarduser');
 
-    Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 });
 
@@ -191,7 +191,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/dashboard-admin', [AppController::class, 'index'])->name('dashboard');
 
-    Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 
@@ -206,7 +206,7 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
     Route::get('/dashboard-manager', [AppController::class, 'managerHome'])->name('dashboardman');
 
-    Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 });
 
@@ -219,9 +219,6 @@ Route::prefix('activite/demande-activites-passations')->group(function () {
 
     Route::get('/create', [PassationActController::class, 'create'])->name('mespassationman.create');
 
-   // Route::get('/edite/{passation}', [PassationActController::class, 'edite'])->name('mespassation.edite');
-
-   // accepter et refuser les demandes passationsdu coté du manager
     Route::put('/updateval/{id}', [PassationActController::class, 'AccepterPassationMan'])->name('mespassationman.valid');
 
     Route::put('/updateref/{id}', [PassationActController::class, 'RefuserPassationMan'])->name('mespassationman.refus');

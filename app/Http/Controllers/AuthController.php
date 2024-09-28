@@ -10,6 +10,8 @@ use Flasher\Prime\FlasherInterface;
 use GrahamCampbell\ResultType\Success;
 use App\Http\Controllers\View;
 
+use function Laravel\Prompts\alert;
+
 class AuthController extends Controller
 
 {
@@ -58,38 +60,56 @@ class AuthController extends Controller
       //  dd($request -> only("email","password"));
      //   $credentials = $request -> only("email","password");
 
-        
+
 
         if(Auth::attempt($credentials = $request -> only("email","password"))){
 
 
 
 
-            if (auth()->user()->role == 'admin') {
-
-
-
-                return redirect()->route('dashboard');
-
-            }else if (auth()->user()->role == 'manager') {
-
-                return redirect()->route('dashboardman');
-
-            }else{
-
-                return redirect()->route('dashboarduser');
+       if (Auth::attempt($credentials)) {
+                // Check user role and redirect accordingly
+                switch (auth()->user()->role) {
+                    case 'admin':
+                        return redirect()->route('dashboard');
+                    case 'manager':
+                        return redirect()->route('dashboardman');
+                    default:
+                        return redirect()->route('dashboarduser');
+                }
 
             }
 
+
+
+
+            // if (Auth::attempt($credentials)) {
+            //     // Check user role and redirect accordingly
+            //     switch (auth()->user()->role) {
+            //         case 'admin':
+            //             return redirect()->route('dashboard');
+            //         case 'manager':
+            //             return redirect()->route('dashboardman');
+            //         default:
+            //             return redirect()->route('dashboarduser');
+            //     }
+
+
+
         }else{
 
-            notyf(" idenfiant incorrect ou utilisateur inexistant",\Flasher\Prime\Notification\NotificationInterface::ERROR);
-            return redirect()->route('login');
 
+ // Flash error message
+               notyf("Identifiant incorrect ou utilisateur inexistant", \Flasher\Prime\Notification\NotificationInterface::ERROR);
+
+ // Redirect back to login with input
+               return redirect()->route('login');
 
                }
 
         }
+
+
 
 
 
@@ -103,5 +123,4 @@ class AuthController extends Controller
         }
 
 
-}
-
+    }

@@ -14,8 +14,9 @@ class CongesController extends Controller
 
     public function congescreate(){
 
-        return view('collab.conges.createcg');
+        // sweetalert('Vous ne pouvez pas planifier votre cong&eacute; car votre remplaçant en a dejà effectu&eacute;.', $type=\Flasher\Prime\Notification\NotificationInterface::ERROR );
 
+        return view('collab.conges.createcg');
 
     }
     //
@@ -48,7 +49,16 @@ class CongesController extends Controller
             $travailler_user =  DB::table('travailler_sur')->where('travailler_sur.matrcl', $matricul->matrcl )->get();
 
 
- // dd($tbcritiques);
+           // dd($request->libproj);
+
+        // mon matricule utilisateur   ($matricul->matrcl)
+        $matriculback = DB::table('dtbdesign_bak_mang')->where('matrcl_pers', $matricul->matrcl )->first();
+
+        $backupconges = DB::select('select * from planifier where planifier.etatf = 2 and matrcl =',[ $matriculback->matrcl_back ]);
+
+        $Mnconges = DB::select('select * from planifier where planifier.etatf = 2 and matrcl =',[ $matriculback->matrcl_pers ]);
+
+        // dd($tbcritiques);
             $usercritique = false;
           foreach( $tbcritiques as  $tbcritique){
           //  notyf("Vous ne pouvez pas enregistrer planifier votre congés car vous êtes à une date critique",\Flasher\Prime\Notification\NotificationInterface::ERROR);
@@ -59,36 +69,67 @@ class CongesController extends Controller
 
 
 
-             //   if($tbcritique->code_act == $travailler_sur->code_activite){
+                  //   if($tbcritique->code_act == $travailler_sur->code_activite){
                    if(strcasecmp($tbcritique->code_act ,$travailler_sur->code_activite) === 0){
 
 
-                //  $dateDebutcritq = Carbon::parse($tbcritique->date_deb_crit);
-                //  $dateFincritq = Carbon::parse($tbcritique->date_fin_crit);
-                //  $datedb = Carbon::parse($Request->input('datedc'));
+                  //  $dateDebutcritq = Carbon::parse($tbcritique->date_deb_crit);
+                  //  $dateFincritq = Carbon::parse($tbcritique->date_fin_crit);
+                  //  $datedb = Carbon::parse($Request->input('datedc'));
 
 
-                     if(Carbon::parse($Request->datedc)->between($tbcritique->date_deb_crit, $tbcritique->date_fin_crit) ){
+                     if(Carbon::parse($Request->datedc)->between($tbcritique->date_deb_crit, $tbcritique->date_fin_crit)){
                    // if($datedb->between($dateDebutcritq,$dateFincritq) ){
 
                        // dd($travailler_sur->code_activite);
 
                          $usercritique = true;
                          break 2;
+
+
                     }
                 }
              }
 
               }
 
+              $userconge = false;
+              foreach( $backupconges  as  $backupconge ){
+
+
+                foreach( $Mnconges  as  $Mconge ){
+
+
+            //    if(Carbon::parse($Request->datedc)->between($Mnconges->date_depart, $Mnconges->date_arrive )){
+                    // if($datedb->between($dateDebutcritq,$dateFincritq) ){
+
+                        // dd($travailler_sur->code_activite);
+
+                       //   $usercritique = true;
+                       //   break 2;
+
+                      //    A999LOL²1111111111111111111111111111111V N     }
+
+
+                     }
+
+
+              }
+
+              if($userconge){
+                sweetalert('Vous ne pouvez pas planifier votre cong&eacute; car votre remplaçant en a dejà effectu&eacute;.');
+              }
+
 
               if($usercritique){
+
 
                // dd($usercritique);
                 notyf("Vous ne pouvez pas enregistrer planifier votre congés car vous êtes à une date critique",\Flasher\Prime\Notification\NotificationInterface::ERROR);
 
               }
 
+             // if()
 
         }catch(Exception $e){
             dd($e);
@@ -156,13 +197,13 @@ class CongesController extends Controller
         ->select('planifier.*','tblcg.*')
         ->where([
             ['planifier.matrcl', '=', $matricul->matrcl ],
-            ['planifier.etatvalidpl', '=', $cgref ],
+            ['planifier.etatvalidpl', '=', $cgref ]
 
         ])
         ->get();
 
 
-       // dd($planifcgref);
+       //dd($planifcg );
 
 
        // dd($tblperinfocg);

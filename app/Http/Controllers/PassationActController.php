@@ -528,7 +528,7 @@ return redirect()->back();
                 // 2 pour accepter la passation backup
                 $ValidpassBack = 2;
 
-                $AccepterMan = DB::update('update valider set etatpassbackup = ? , date_validpassback = now() where valider.idpasst = ?',[$ValidpassBack, $id] );
+                $AccepterMan = DB::update('update valider set  date_validpassback = now(),etatpassbackup = ? where valider.idpasst = ?',[$ValidpassBack, $id] );
 
                 notyf("passation accept&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
 

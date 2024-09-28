@@ -38,7 +38,7 @@
             <form class="tw-space-y-6" method="POST" action="{{ route('handlerLogin') }}">
                 <div class="box">
                 @csrf
-                @method('POST')
+              {{-- @method('POST') --}}
 
                 @if(@Session:: get('error_msg'))
 
