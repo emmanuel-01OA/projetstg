@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class AppController extends Controller
 {
 
-  
+
     public function adminHome()
     {
 
@@ -17,6 +17,8 @@ class AppController extends Controller
 
     }
     public function managerHome() {
+
+
         return view('dashboardmanager');
 
     }
@@ -25,7 +27,24 @@ class AppController extends Controller
 
     {
 
-        return view('dashboarduser');
+        $totalpassationac = DB::table('tbldmdpasst')->count();
+        $totaldemdcg = DB::table('tblcg')->count();
+
+        $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+        $totaldemdcgs = DB::table('planifier')
+        ->where('matrcl', $matricul->matrcl )
+        ->where('etatf', 1)
+        ->count();
+
+
+        $totaldemdpas = DB::table('tbldmdpasst')
+        ->where('matrcl', $matricul->matrcl )
+        ->where('etatd', 1)
+        ->count();
+
+       // dd($totaldemdpas);
+        return view('dashboarduser',compact('totaldemdcgs','totaldemdpas'));
 
     }
 
@@ -51,7 +70,25 @@ class AppController extends Controller
 
         $totalpassationac = DB::table('tbldmdpasst')->count();
         $totaldemdcg = DB::table('tblcg')->count();
-         return view('dashboarduser', compact('totalpassationac', 'totaldemdcg'));
+
+        $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
+
+        $totaldemdcgs = DB::table('planifier')
+        ->where('matrcl', $matricul->matrcl )
+        ->where('etatf', 1)
+        ->count();
+
+
+        $totaldemdpas = DB::table('tbldmdpasst')
+        ->where('matrcl', $matricul->matrcl )
+        ->where('etatd', 1)
+        ->count();
+
+       // dd($totaldemdpas);
+        // $totaldemdcgs = DB::table('planifier')->where('')
+        // ->count();
+
+         return view('dashboarduser', compact('totalpassationac', 'totaldemdcg', 'totaldemdcgs', 'totaldemdpas'));
 
      }
 
@@ -63,6 +100,9 @@ class AppController extends Controller
         $totalpersonnel =  10;
         $totalpassationac = DB::table('tbldmdpasst')->count();
         $totaldemdcg = DB::table('tblcg')->count();
+
+
+
          return view('dashboardmanager', compact( 'totalpersonnel', 'totalpassationac', 'totaldemdcg'));
      }
 }

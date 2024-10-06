@@ -30,19 +30,19 @@
 </div><!--//row-->
 
 
-<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">passation(s) en attente de validation</a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">passation(s) valid&eacute;e(s) </a>
-    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">passation(s) refus&eacute;e(s) </a>
+ <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Passation(s) en attente de validation</a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Passation(s) valid&eacute;e(s) </a>
+    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Passation(s) refus&eacute;e(s) </a>
 
-</nav>
+ </nav>
 
  {{-- modale --}}
 
 
 
 
-<div class="tab-content" id="orders-table-tab-content">
+ <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">
             <div class="app-card-body">
@@ -59,13 +59,13 @@
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
                                 <th class="cell">Pr&eacute;nom(s)</th>
+                                <th class="cell">Fonction</th>
                                 <th class="cell">Email</th>
                                 <th class="cell">date demande</th>
-                                <th class="cell">Date de debut </th>
-                                <th class="cell">Date de fin </th>
+                                {{-- <th class="cell">Date de debut </th>
+                                <th class="cell">Date de fin </th> --}}
                                 <th class="cell">&eacute;tat passation</th>
                                 <th class="cell"></th>
-
                                 <th class="cell text-center" colspan="70">Action(s)</th>
 
 
@@ -89,14 +89,15 @@
 
                                 <td class="cell">{{ $ActivitpassAttentes->nam }}</td>
                                  <td class="cell">{{ $ActivitpassAttentes->renam }}</td>
-                                 <td class="cell">{{ $ActivitpassAttentes->eml }}</td>
-                                 <td class="cell">{{ $ActivitpassAttentes->datedmd }}</td>
-                                 <td class="cell">{{ $ActivitpassAttentes->date_debut }}</td>
-                                  <td class="cell">{{ $ActivitpassAttentes->date_fin }}</td>
+                                 <td class="cell">{{ $ActivitpassAttentes->libelle_fonct }}</td>
+                                <td class="cell">{{ $ActivitpassAttentes->eml }}</td>
+                                <td class="cell">{{ $ActivitpassAttentes->datedmd }}</td>
+                                {{-- <td class="cell">{{ $ActivitpassAttentes->date_deb }}</td>
+                                <td class="cell">{{ $ActivitpassAttentes->datefin }}</td> --}}
 
 
                                 @if($ActivitpassAttentes->etatpassman == $StatutAttentepassMan)
-                                <td class="cell"><span class="badge bg-warning">En Attente </span></td>
+                                <td class="cell"><span class="badge bg-warning">En Attente</span></td>
 
                                 @endif
 
@@ -172,7 +173,7 @@
 
 
 
-{{-- test Modale --}}
+   {{-- test Modale --}}
 
 
 
@@ -221,10 +222,11 @@
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
                                 <th class="cell">Pr&eacute;nom(s)</th>
+                                <th class="cell">Fonction</th>
                                 <th class="cell">Email</th>
                                 <th class="cell">date demande</th>
-                                <th class="cell">Date de debut </th>
-                                <th class="cell">Date de fin </th>
+                                {{-- <th class="cell">Date de debut </th>
+                                <th class="cell">Date de fin </th> --}}
                                 <th class="cell">&eacute;tat passation</th>
 
 
@@ -249,10 +251,11 @@
 
                                 <td class="cell">{{ $ActivitpasstValide->nam }}</td>
                                 <td class="cell">{{ $ActivitpasstValide->renam }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->libelle_fonct }}</td>
                                 <td class="cell">{{ $ActivitpasstValide->eml }}</td>
                                 <td class="cell">{{ $ActivitpasstValide->datedmd }}</td>
-                                <td class="cell">{{ $ActivitpasstValide->date_debut }}</td>
-                                <td class="cell">{{ $ActivitpasstValide->date_fin }}</td>
+                                {{-- <td class="cell">{{ $ActivitpasstValide->date_deb }}</td>
+                                <td class="cell">{{ $ActivitpasstValide->datefin }}</td> --}}
 
 
                                 @if($ActivitpasstValide->etatpassman == $StatutValpassMan )
@@ -321,6 +324,7 @@
                                 <th class="cell">Matricule</th>
                                 <th class="cell">Nom</th>
                                 <th class="cell">Pr&eacute;nom(s)</th>
+                                <th class="cell">Fonction</th>
                                 <th class="cell">Email</th>
                                 <th class="cell">date demande</th>
                                 <th class="cell">Date de debut </th>
@@ -348,10 +352,11 @@
 
                                 <td class="cell">{{ $ActivitpasstRefuser->nam }}</td>
                                 <td class="cell">{{ $ActivitpasstRefuser->renam }}</td>
+                                <td class="cell">{{ $ActivitpasstRefuser->libelle_fonct }}</td>
                                 <td class="cell">{{ $ActivitpasstRefuser->eml }}</td>
                                 <td class="cell">{{ $ActivitpasstRefuser->datedmd }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->date_debut }}</td>
-                                <td class="cell">{{ $ActivitpasstRefuser->date_fin }}</td>
+                                <td class="cell">{{ $ActivitpasstRefuser->date_deb }}</td>
+                                <td class="cell">{{ $ActivitpasstRefuser->datefin }}</td>
 
 
                                 @if($ActivitpasstRefuser->etatpassman == $StatutRefpassMan )
@@ -396,7 +401,7 @@
             </ul>
         </nav><!--//app-pagination-->
 
-    </div><!--//tab-pane-->
+ </div><!--//tab-pane-->
 
 
 

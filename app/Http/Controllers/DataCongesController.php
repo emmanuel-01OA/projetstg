@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
+use function Laravel\Prompts\table;
+
 class DataCongesController extends Controller
 {
     //
@@ -83,6 +85,35 @@ class DataCongesController extends Controller
           $counts = array_values($data);
 
 
-        return view("managerviews.Dataviews.VisualisationPlannConges", compact('months', 'counts'));
+          $matrcletat = 2;
+
+
+          $tasks = DB::table('planifier')
+          ->join('tblper', 'tblper.matrcl','=','planifier.matrcl')
+          ->select('*')
+          ->where([
+            ['planifier.etatvalidpl', '=', $matrcletat ],
+
+        ])
+        ->get();
+
+     //   dd($tasks);
+        //   return view('gantt.index', compact('tasks'));
+
+
+        //   if ($request->has('employee_name') && $request->has('date')) {
+        //     $leaves = Leave::where('employee_name', $request->employee_name)
+        //                    ->whereDate('start_date', '<=', $request->date)
+        //                    ->whereDate('end_date', '>=', $request->date)
+        //                    ->get();
+        // }
+
+        return view("managerviews.Dataviews.VisualisationPlannConges", compact('months', 'counts', 'tasks'));
     }
+
+
+
+
+
+
 }

@@ -72,10 +72,10 @@
                                 <td class="cell">{{ $dmdpasstAttentes->description }}</td>
                                 <td class="cell">{{ $dmdpasstAttentes->libpasst }}</td>
                                 <td class="cell">{{ $dmdpasstAttentes->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $dmdpasstAttentes->datedmd }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($dmdpasstAttentes->datedmd)->format('d/m/y')  }}</td>
 
 
-                                @if($dmdpasstAttentes->etatd == $etatAttente)
+                                @if($dmdpasstAttentes->etatv == $etatAttente)
                                 <td class="cell"><span class="badge bg-warning">En Attente </span></td>
 
                                 @endif
@@ -144,9 +144,9 @@
                                 <td class="cell">{{ $dmdpasstValiders->description }}</td>
                                 <td class="cell">{{ $dmdpasstValiders->libpasst }}</td>
                                 <td class="cell">{{ $dmdpasstValiders->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $dmdpasstValiders->datedmd }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($dmdpasstValiders->datedmd)->format('d/m/y') }}</td>
 
-                                @if($dmdpasstValiders->etatd == $etatValider )
+                                @if($dmdpasstValiders->etatv  == $etatValider )
                                 <td class="cell"><span class="badge bg-success">Valid&eacute; </span></td>
 
                                 @endif
@@ -217,9 +217,9 @@
                                 <td class="cell">{{ $dmdpasstRefuse->description }}</td>
                                 <td class="cell">{{ $dmdpasstRefuse->libpasst }}</td>
                                 <td class="cell">{{ $dmdpasstRefuse->pourcen_travail_eff }}</td>
-                                <td class="cell">{{ $dmdpasstRefuse->datedmd }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($dmdpasstRefuse->datedmd)->format('d/m/y')  }}</td>
 
-                                @if($dmdpasstRefuse->etatd == $etatRefuser)
+                                @if($dmdpasstRefuse->etatv == $etatRefuser)
                                 <td class="cell"><span class="badge bg-danger">Refus&eacute;</span></td>
 
                                 @endif

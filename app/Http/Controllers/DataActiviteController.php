@@ -57,6 +57,9 @@ class DataActiviteController extends Controller
 
     public function indexVisualisationActivites(){
 
+
+
+
         return view("managerviews.Dataviews.VisualisationPlannActivite");
     }
 

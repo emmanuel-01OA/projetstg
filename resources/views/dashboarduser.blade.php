@@ -48,7 +48,7 @@
         <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
                 <h4 class="stats-type mb-1">TOTAL DEMANDE CONGES</h4>
-                <div class="stats-figure">5</div>
+                <div class="stats-figure">{{ $totaldemdcgs }}</div>
 
             </div><!--//app-card-body-->
             <a class="app-card-link-mask" href="#"></a>

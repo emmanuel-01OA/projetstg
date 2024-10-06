@@ -24,8 +24,8 @@
 
                     <h5 class="text-center">Code passation : {{ $ActivitpassAttentes->code_activite }}  </h5>
 
-                    <h5 class="text-center">libell&eacute; de la passation :</h5>
-                    
+                    <h5 class="text-center">Libell&eacute; de la passation :</h5>
+
                         <h5>{{ $ActivitpassAttentes->libelle_activite }}</h5>
 
 
@@ -52,10 +52,10 @@
                     <h5 class="text-center"> {{ $ActivitpassAttentes->datedmd }}
 
 
-                        <h5 class="text-center">{{ $ActivitpassAttentes->date_debut }}</h5>
+                        <h5 class="text-center">{{ $ActivitpassAttentes->date_deb }}</h5>
 
 
-                    {{ $ActivitpassAttentes->date_fin }}
+                    {{ $ActivitpassAttentes->datefin }}
 
 
                     {{ $ActivitpassAttentes->etatpassman }}

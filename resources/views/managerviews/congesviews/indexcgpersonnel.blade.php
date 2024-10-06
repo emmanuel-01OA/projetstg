@@ -95,8 +95,8 @@
 
                                 <td class="cell"><span class="truncate">{{ $congesP->taux_conges }}</span></td>
 
-                                <td class="cell"><span class="truncate">{{ $congesP->date_depart }}</span></td>
-                                <td class="cell"><span class="truncate">{{ $congesP->date_arrive }}</span></td>
+                                <td class="cell"><span class="truncate">{{ \Carbon\Carbon::parse($congesP->date_depart)->format('d/m/y')  }}</span></td>
+                                <td class="cell"><span class="truncate">{{ \Carbon\Carbon::parse($congesP->date_arrive)->format('d/m/y')  }}</span></td>
 
                                 <td class="cell"><span class="truncate"></span></td>
                                 <td class="cell"><span class="truncate"></span></td>
@@ -119,7 +119,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="20">Aucune cong&eacute; enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucun cong&eacute; enregistr&eacute;</td>
 
                             </tr>
 

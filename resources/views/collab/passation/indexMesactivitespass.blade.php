@@ -89,8 +89,8 @@
                                 <td class="cell">{{ $ActivitpassAttent->renam }}</td>
                                 <td class="cell">{{ $ActivitpassAttent->eml }}</td>
                                 <td class="cell">{{ $ActivitpassAttent->datedmd }}</td>
-                                <td class="cell">{{ $ActivitpassAttent->date_debut }}</td>
-                                <td class="cell">{{ $ActivitpassAttent->date_fin }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($ActivitpassAttent->date_debut)->format('d/m/y') }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($ActivitpassAttent->date_fin)->format('d/m/y') }}</td>
 
 
                                 @if($ActivitpassAttent->etatpassbackup == $StatutAttentepassback)

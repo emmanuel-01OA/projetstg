@@ -30,12 +30,7 @@ public int $EtatActiviteInactif = 0;
 
         $Activiteinactif = DB::select('select * from tblac, tbltyac where tblac.id_type_act = tbltyac.id_type_act and etatac = ?', [$this->EtatActiviteInactif ]);
 
-        // $statutac =
 
-        // if(){
-//
-     //   }
-  //    dd($ActiviteActif);
 
         return view("managerviews.Activiteviews.indexactiviteman", compact('ActiviteActif' , 'Activiteinactif'));
 

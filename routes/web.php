@@ -105,6 +105,10 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+// authentification
+    Route::middleware('auth:sanctum')->get('/tokens', [AuthController::class, 'listTokens']);
+Route::middleware('auth:sanctum')->delete('/tokens/{tokenId}', [AuthController::class, 'revokeToken']);
+
 });
 
 
@@ -191,14 +195,24 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/dashboard-admin', [AppController::class, 'index'])->name('dashboard');
 
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+   // Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
+// authentification
+    Route::middleware('auth:sanctum')->get('/tokens', [AuthController::class, 'listTokens']);
+    Route::middleware('auth:sanctum')->delete('/tokens/{tokenId}', [AuthController::class, 'revokeToken']);
+
 });
 
 
 // FIN route Admin
 ////////////////////////////////////////
 
-/*route pour les manager
+/*
+   Route pour les manager
 */
 
 
@@ -207,6 +221,11 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/dashboard-manager', [AppController::class, 'managerHome'])->name('dashboardman');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+// authentification
+    Route::middleware('auth:sanctum')->get('/tokens', [AuthController::class, 'listTokens']);
+Route::middleware('auth:sanctum')->delete('/tokens/{tokenId}', [AuthController::class, 'revokeToken']);
 
 });
 
@@ -233,7 +252,7 @@ Route::prefix('conges/conges-personnel')->group(function () {
 
     Route::get('/create', [CongesController::class, 'create'])->name('mesCongespersman.create');
 
-    Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('mespassation.edite');
+    Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('mesconges.edite');
 
 });
 
@@ -246,6 +265,12 @@ Route::prefix('conges/demandes-conges-personnel')->group(function () {
     Route::get('/create', [CongesController::class, 'create'])->name('demande-Congespersman.create');
 
     Route::get('/edite/{passation}', [CongesController::class, 'edite'])->name('demande-mespassation.edite');
+
+    Route::put('/updaterefcg/{id}', [CongesController::class,'RefuserCongeMan'])->name('mescongerefus.refus');
+
+    Route::put('/updatevalcg/{id}', [CongesController::class,'ValiderCongeMan'])->name('mescongervalid.valid');
+
+
 
 });
 
@@ -310,6 +335,8 @@ Route::prefix('activite/Attrib-backup')->group(function () {
 Route::prefix('conges/VisualisationConges')->group(function () {
 
     Route::get('/', [DataCongesController::class, 'indexVisualisationConges'])->name('VisualisationConges.index');
+
+    Route::get('/conges', [DataCongesController::class, 'Fitre'])->name('VisualisationConges2.index');
 
 });
 

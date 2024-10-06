@@ -7,7 +7,7 @@
 
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0"> Activit&eacute;s</h1>
+        <h1 class="app-page-title mb-0">Temps critique des Activit&eacute;s</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">
@@ -70,6 +70,8 @@
                                 <th class="cell">Date de debut temps critique</th>
                                 <th class="cell">Date de fin temps critique</th>
                                 <th class="cell">&eacute;tat</th>
+                                <th class="cell tw-text-center" colspan="20">Action(s)</th>
+
 
                                 {{-- <th class="cell">2e Date de debut temps critique</th>
                                 <th class="cell">2e Date de fin temps critique</th> --}}
@@ -142,6 +144,27 @@
                                <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
 
+
+        <td class="cell">
+
+
+            <a href="" data-bs-toggle="modal"  data-bs-target="#editp" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+                Modifier</a>
+
+                {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+
+            </td>
+
+                <td class="cell">
+
+
+            <a href="" data-bs-toggle="modal"  data-bs-target="#editbrefus" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Supprimer</a>
+
+            {{-- @include('collab.passation.modaledecision.modalRefdmdpass') --}}
+        </td>
+
+
                             </tr>
 
                             @empty
@@ -196,6 +219,9 @@
                                 <th class="cell">Date de debut temps critique</th>
                                 <th class="cell">Date de fin temps critique</th>
                                 <th class="cell">&eacute;tat</th>
+                                <th class="cell text-center" colspan="20">Action</th>
+
+
 
                             </tr>
                         </thead>
@@ -209,8 +235,8 @@
                                 <td class="cell">{{ $TmpActInactifs->lib_act }}</td>
                                 <td class="cell">{{ $TmpActInactifs->libelle_activite }}</td>
                                 <td class="cell">{{ $TmpActInactifs->description }}</td>
-                                <td class="cell">{{ $TmpActInactifs->date_deb }}</td>
-                                <td class="cell">{{ $TmpActInactifs->datefin}}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActInactifs->date_deb)->format('d/m/y')  }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($TmpActInactifs->datefin)->format('d/m/y') }}</td>
 
 
 

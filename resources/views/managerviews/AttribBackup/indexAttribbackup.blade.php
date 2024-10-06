@@ -6,7 +6,7 @@
 
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0"> Attribution backup</h1>
+        <h1 class="app-page-title mb-0"> Attribution remplaçant (backup)</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">
@@ -64,7 +64,7 @@
                                 <th class="cell">Nom backup</th>
                                 <th class="cell">Prenom backup</th>
                                 <th class="cell">Fonction du backup</th>
-                                {{-- <th class="cell text-center">Action</th> --}}
+                                <th class="cell tw-text-center" colspan="20">Action(s)</th>
 
                             </tr>
                         </thead>
@@ -82,7 +82,53 @@
                                 <td class="cell">{{ $attribbackups->renomback }}</td>
                                 <td class="cell">{{ $attribbackups->fonction_back_libelle }}</td>
 
-                                
+
+{{--  --}}
+
+{{-- <td class="cell">
+
+    <a href="#addne" data-bs-toggle="modal" data-bs-target="#addne" class="py-2 tw-px-3 tw-flex tw-items-center tw-text-sm tw-font-medium tw-text-center hover:tw-bg-gray-100 hover:tw-text-gray-900 tw-text-gray-100 tw-rounded-lg tw-border hover:tw-border-gray-900 tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:ring-white-300 tw-rounded-lg dark:bg-white-600 dark:hover:tw-bg-white-700 dark:focus:tw-ring-white-800">
+
+        @include('collab.passation.modaledecision.modalvoirpass')
+
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="tw-w-4 tw-h-4 tw-mr-2 tw--ml-0.5">
+           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+           <path fill-rule="evenodd" clip-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+       </svg>
+     Voir
+
+     </a>
+
+
+
+     </td> --}}
+
+
+        <td class="cell">
+
+
+    <a href="" data-bs-toggle="modal"  data-bs-target="#editp" class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
+
+        Modifier</a>
+
+        {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+
+    </td>
+
+        <td class="cell">
+
+
+    <a href="" data-bs-toggle="modal"  data-bs-target="#editbrefus" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Supprimer</a>
+
+    {{-- @include('collab.passation.modaledecision.modalRefdmdpass') --}}
+</td>
+
+
+</tr>
+
+                                {{--  --}}
+
                             </tr>
                         @empty
                             <tr>

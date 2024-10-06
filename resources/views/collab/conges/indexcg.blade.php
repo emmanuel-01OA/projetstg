@@ -72,13 +72,13 @@
 
         {{-- @foreach ($tblperinfocg as $tblperinfocg) --}}
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
-            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congé totale : </dd>
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux de congé totale  </dd>
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">{{ $tblperinfocg->taux_conges   }}</dt>
 
         </div>
 
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
-            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Nom et prénom :</dd>
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Nom et prénom </dd>
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">{{ $tblperinfocg->nam }}  {{ $tblperinfocg->renam }}</dt>
         </div>
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
@@ -86,7 +86,7 @@
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"></dt>
         </div>
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
-            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congés restant</dd>
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux de congés restant</dd>
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold">{{ $tblperinfocg->taux_rest }}</dt>
         </div>
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
@@ -111,7 +111,7 @@
 
          {{-- @foreach ($tblperinfocg as $tblperinfocg) --}}
          <div class="tw-flex tw-flex-col tw-items-center tw-justify-center">
-            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux congé totale : </dd>
+            <dd class="tw-text-gray-500 dark:tw-text-gray-400">Taux de congé totale : </dd>
             <dt class="tw-mb-2 tw-text-3xl tw-font-extrabold"> - </dt>
 
         </div>
@@ -218,8 +218,9 @@
                                 <th class="cell ">date de d&eacute;but </th>
                                 <th class="cell ">date finale</th>
                                 <th class="cell ">Statut</th>
-                                <th class="cell ">Etat</th>
-                                <th class="cell text-center" >Action(s)</th>
+                                <th class="cell tw-text-center" colspan="2">Action(s)</th>
+                                {{-- <th class="cell ">Etat</th> --}}
+                                {{-- <th class="cell tw-text-center" colspan="10" >Action(s)</th> --}}
 
                             </tr>
                         </thead>
@@ -233,52 +234,17 @@
                                 <td class="cell" >{{ $planifcg->id_p }}</td>
                                 <td class="cell">{{ $planifcg->lbelle_conges }}</td>
                                 <td class="cell">{{ $planifcg->taux_plcg }}</td>
-                                <td class="cell">{{ $planifcg->date_depart }}</td>
-                                <td class="cell">{{ $planifcg->date_arrive }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($planifcg->date_depart)->format('d/m/y') }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($planifcg->date_arrive)->format('d/m/y') }}</td>
 
                                 @if($planifcg->etatvalidpl == 1 )
                                 <td class="cell">
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-orange-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-orange-800 dark:tw-bg-orange-900 dark:tw-text-orange-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                         </svg>
-
                                         En cours
                                     </dd>
-
-
-                                </td>
-
-
-                                @elseif ($planifcg->etatvalidpl == 2 )
-
-                                <td class="cell">
-
-                                    {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
-
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
-                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                        </svg>
-                                       Valid&eacute;
-                                      </dd>
-
-
-                                </td>
-
-
-                                @elseif ($planifcg->etatvalidpl == 0 )
-
-                                <td class="cell">
-
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
-                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                        </svg>
-                                       Refuser
-                                      </dd>
-
-
                                 </td>
 
 
@@ -289,12 +255,7 @@
                                 @endif
 
 
-
-
-
-
-
-                                @if($planifcg->etatf =="1" )
+                                {{-- @if($planifcg->etatf =="1" )
                                 <td class="cell"><span class="badge bg-success">Actif</span></td>
 
 
@@ -302,28 +263,22 @@
 
                                 <td class="cell"><span class="badge bg-danger">Inactif</span></td>
                                 @endif
+ --}}
 
 
 
 
+ <td class="cell tw-text-center tw-w-10">
+    <a href="" class="flex tw-items-center tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-bg-green-600">
+        Modifier
+    </a>
+</td>
 
-
-                                <td class="cell">
-
-                                    <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
-
-                                        Modifier </a>
-                                        {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
-
-                                </td>
-
-                              <td class="cell">
-
-                                <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
-{{--
-                                    @include('collab.passation.modaledecision.modalRefdmdpass') --}}
-                             </td>
-
+<td class="cell tw-text-center tw-w-10">
+    <a href="" class="flex tw-items-center tw-text-white hover:tw:text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 dark:tw-border-red-500 dark:tw:text-red-500 dark:hover:tw-bg-red-600">
+        Annuler
+    </a>
+</td>
 
 
                             </tr>
@@ -331,7 +286,7 @@
                             @empty
 
                             <tr>
-                                <td class="cell text-center" colspan="20">Aucune plannification de cong&eacute;(s) enregistr&eacute;</td>
+                                <td class="cell text-center" colspan="20">Aucune plannification de cong&eacute;(s) en attente</td>
                             </tr>
 
                             @endforelse
@@ -374,9 +329,8 @@
                                 <th class="cell ">date de d&eacute;but </th>
                                 <th class="cell ">date finale</th>
                                 <th class="cell ">Statut</th>
-
-                                <th class="cell ">Etat</th>
-                                <th class="cell text-center">Action(s)</th>
+                                {{-- <th class="cell ">Etat</th> --}}
+                                {{-- <th class="cell  tw-text-center" colspan="20">Action(s)</th> --}}
 
                             </tr>
                         </thead>
@@ -390,17 +344,16 @@
                                 <td class="cell" >{{ $planifcgval->id_p }}</td>
                                 <td class="cell">{{ $planifcgval->lbelle_conges }}</td>
                                 <td class="cell">{{ $planifcgval->taux_plcg }}</td>
-                                <td class="cell">{{ $planifcgval->date_depart }}</td>
-                                <td class="cell">{{ $planifcgval->date_arrive }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($planifcgval->date_depart)->format('d/m/y')  }}</td>
+                                <td class="cell">{{ \Carbon\Carbon::parse($planifcgval->date_arrive)->format('d/m/y')  }}</td>
 
                                 @if($planifcgval->etatvalidpl == 1 )
 
                                 <td class="cell">
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-orange-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-orange-800 dark:tw-bg-orange-900 dark:tw-text-orange-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                         </svg>
-
                                         En cours
                                     </dd>
 
@@ -412,13 +365,13 @@
                                 <td class="cell">
 
                                     {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
-
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
+                                      <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                         </svg>
-                                       Valid&eacute;
-                                      </dd>
+
+                                        Valid&eacute;
+                                    </dd>
 
 
                                 </td>
@@ -426,57 +379,48 @@
                                 @elseif ($planifcgval->etatvalidpl == 0 )
 
                                 <td class="cell">
-
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
+                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-orange-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-orange-600 dark:tw-bg-orange-900 dark:tw-text-orange-300">
                                         <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                         </svg>
-                                       Refuser
-                                      </dd>
-
+                                        Refuser
+                                    </dd>
 
                                 </td>
                                 @else
 
                                 <td class="cell text-center">Aucun statut</td>
-
                                 @endif
 
-
-
-
-
-
-
-                                @if($planifcgval->etatf =="1" )
+                                {{-- @if($planifcgval->etatf =="1" )
                                 <td class="cell"><span class="badge bg-success">Actif</span></td>
 
 
                                 @else
 
                                 <td class="cell"><span class="badge bg-danger">Inactif</span></td>
-                                @endif
+                                @endif --}}
 
 
 
 
 
 
-                                <td class="cell" >
+                                {{-- <td class="cell" >
 
                                     <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
 
                                         Modifier </a>
-                                        {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
+                                         @include('collab.passation.modaledecision.modalaccpass')
 
-                                </td>
-
+                                </td> --}}
+{{--
                               <td class="cell">
 
                                 <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
 {{--
-                                    @include('collab.passation.modaledecision.modalRefdmdpass') --}}
-                             </td>
+                                   }
+                             </td> --}}
 
 
 
@@ -538,7 +482,6 @@
                             </thead>
                             <tbody>
 
-
                                  @forelse ($planifcgref as $planifcg )
 
                                 <tr>
@@ -549,49 +492,18 @@
                                     <td class="cell">{{ $planifcgref->date_depart }}</td>
                                     <td class="cell">{{ $planifcgref->date_arrive }}</td>
 
-                                    @if($planifcgref->etatvalidpl == 1 )
+                                    @if($planifcgref->etatvalidpl == 0  )
 
 
 
                                      <td class="cell">
-                                    <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
-                                        <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                        </svg>
-
-                                        En cours
-                                    </dd>
-
-
-                                </td>
-
-                                    @elseif ($planifcgref->etatvalidpl == 2 )
-
-                                    <td class="cell">
-
-                                        {{-- <span class="badge bg-success">Valid&eacute;</span> --}}
 
                                         <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-red-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-red-800 dark:tw-bg-red-900 dark:tw-text-red-300">
                                             <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
                                             </svg>
-                                           Valid&eacute;
-                                          </dd>
-
-
-                                    </td>
-
-                                    @elseif ($planifcgref->etatvalidpl == 0 )
-
-                                    <td class="cell">
-
-                                        <dd class="me-2 tw-mt-1.5 tw-inline-flex tw-items-center tw-rounded tw-bg-green-100 tw-px-2.5 tw-py-0.5 tw-text-xs tw-font-medium tw-text-green-800 dark:tw-bg-green-900 dark:tw-text-green-300">
-                                            <svg class="me-1 tw-h-3 tw-w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                            </svg>
-                                           Refuser
-                                          </dd>
-
+                                       Refus&eacute;
+                                     </dd>
 
                                     </td>
 
@@ -602,11 +514,7 @@
                                     @endif
 
 
-
-
-
-
-
+{{--
                                     @if($planifcgref->etatf =="1" )
                                     <td class="cell"><span class="badge bg-success">Actif</span></td>
 
@@ -614,29 +522,7 @@
                                     @else
 
                                     <td class="cell"><span class="badge bg-danger">Inactif</span></td>
-                                    @endif
-
-
-
-
-
-
-                                    <td class="cell">
-
-                                        <a href=""  class="flex tw-items-center  tw-text-white hover:tw-bg-gray-100 hover:tw-text-green-800 tw-border hover:tw-border-green-700 tw-bg-green-700 tw-bg-white-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-green-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-green-500 dark:tw-text-green-500 dark:hover:tw-text-white dark:hover:tw-bg-green-600 dark:focus:tw-ring-green-900">
-
-                                            Modifier </a>
-                                            {{-- @include('collab.passation.modaledecision.modalaccpass') --}}
-
-                                    </td>
-
-                                  <td class="cell">
-
-                                    <a href="" class="flex tw-items-center tw-text-white hover:tw-text-red-700 hover:tw-bg-gray-100 tw-border hover:tw-border-red-700 tw-bg-red-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-3 tw-py-2 tw-text-center dark:tw-border-red-500 dark:tw-text-red-500 dark:hover:tw-text-white dark:hover:tw-bg-red-600 dark:focus:tw-ring-red-900"> Annuler </a>
-    {{--
-                                        @include('collab.passation.modaledecision.modalRefdmdpass') --}}
-                                 </td>
-
+                                    @endif --}}
 
 
                                 </tr>
@@ -644,7 +530,7 @@
                                 @empty
 
                                 <tr>
-                                    <td class="cell text-center" colspan="20">Aucune planification de cong&eacute;(s) enregistr&eacute;</td>
+                                    <td class="cell text-center" colspan="20">Aucune planification de cong&eacute;(s) refuse&eacute;e</td>
                                 </tr>
 
                                 @endforelse

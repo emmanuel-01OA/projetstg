@@ -19,7 +19,7 @@ class PassationActController extends Controller
 
         // les états de validation de demande de passation
 
-            // 0 pour valider
+            // 0 pour refuser
             // 1 pour en attente de validation
             // 2 pour validation
 
@@ -30,14 +30,15 @@ class PassationActController extends Controller
           // requete pour la base de donnees concernant la table status
           $matricul = DB::table('tblper')->where('tblper.eml', auth()->user()->email)->first();
 
-          $dmdpasstAttente = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , tbldmdpasst.etatd  from tbldmdpasst,tblac where tblac.code_activite = tbldmdpasst.code_activite and tbldmdpasst.matrcl = ? and tbldmdpasst.etatd= ?', [$matricul->matrcl, $etatAttente]);
-
-          $dmdpasstValider = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , tbldmdpasst.etatd  from tbldmdpasst,tblac where tblac.code_activite = tbldmdpasst.code_activite and tbldmdpasst.matrcl = ? and tbldmdpasst.etatd=?', [$matricul->matrcl,$etatValider]);
-
-          $dmdpasstRefuser = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , tbldmdpasst.etatd  from tbldmdpasst,tblac where tblac.code_activite = tbldmdpasst.code_activite and tbldmdpasst.matrcl = ? and tbldmdpasst.etatd=?', [$matricul->matrcl,$etatRefuser]);
+          $dmdpasstAttente = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , valider.etatv from tbldmdpasst,tblac,valider where tblac.code_activite = tbldmdpasst.code_activite and valider.idpasst = tbldmdpasst.idpasst and tbldmdpasst.matrcl = ? and valider.etatv = ?', [$matricul->matrcl, $etatAttente]);
 
 
-       //   $passation = DB::select('select * ')
+          $dmdpasstValider = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , valider.etatv from tbldmdpasst,tblac,valider where tblac.code_activite = tbldmdpasst.code_activite and valider.idpasst = tbldmdpasst.idpasst and tbldmdpasst.matrcl = ? and valider.etatv = ?', [$matricul->matrcl,$etatValider]);
+
+          $dmdpasstRefuser = DB::select('select tbldmdpasst.idpasst , tbldmdpasst.code_activite , tblac.description , tbldmdpasst.libpasst, tbldmdpasst.pourcen_travail_eff,tbldmdpasst.datedmd , valider.etatv from tbldmdpasst,tblac,valider where tblac.code_activite = tbldmdpasst.code_activite and valider.idpasst = tbldmdpasst.idpasst and tbldmdpasst.matrcl = ? and valider.etatv = ?', [$matricul->matrcl,$etatRefuser]);
+
+
+
 
           return view('collab.passation.indexpasst', compact('dmdpasstAttente','dmdpasstValider','dmdpasstRefuser','etatAttente','etatValider','etatRefuser'));
 
@@ -80,12 +81,14 @@ class PassationActController extends Controller
         ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
         ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
         ->select('valider.*','tbldmdpasst.*', 'tblac.*', 'tbltyac.*','tblper.*','travailler_sur.*')
+        ->distinct()
         ->where([
             ['valider.matrcl_back', '=', $matriculer->matrcl ],
             ['valider.etatpassbackup', '=', $StatutAttentepassback ],
             ['etatd', '=', $Etatdmdpassback ],
         ])->orderBy('tbldmdpasst.datedmd')
         ->get();
+
 
 
         // les passations qui sont validées par le backup
@@ -97,6 +100,7 @@ class PassationActController extends Controller
         ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
         ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
         ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*','tblper.*','travailler_sur.*')
+        ->distinct()
         ->where([
             ['valider.matrcl_back', '=', $matriculer->matrcl ],
             ['valider.etatpassbackup', '=', $StatutValpassback ],
@@ -115,6 +119,7 @@ class PassationActController extends Controller
         ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
         ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
         ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*', 'tblper.*','travailler_sur.*')
+        ->distinct()
         ->where([
             ['valider.matrcl_back', '=', $matriculer->matrcl ],
             ['valider.etatpassbackup', '=', $StatutRefpassback ],
@@ -195,8 +200,15 @@ class PassationActController extends Controller
           ->join('tblper', 'tblper.matrcl', '=','tbldmdpasst.matrcl')
           ->join('tblac', 'tblac.code_activite', '=','tbldmdpasst.code_activite')
           ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
-          ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
-          ->select('valider.*','tbldmdpasst.*', 'tblac.*', 'tbltyac.*','tblper.*','travailler_sur.*')
+          // ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
+
+          ->join('travailler_sur', function($join) {
+            $join->on('travailler_sur.matrcl', '=', 'tbldmdpasst.matrcl');
+                //  ->on('travailler_sur.code_activite', '=', 'tblac.code_activite');
+        })
+          ->join('tblfonc', 'tblfonc.code_fonct', '=','tblper.code_fonct')
+          ->select('valider.*','tbldmdpasst.*', 'tblac.code_activite','tblac.lib_act','tblac.*' ,'tblfonc.libelle_fonct', 'tbltyac.libelle_activite','tblper.*','travailler_sur.*')
+          ->distinct()
           ->where([
               ['valider.matrclman', '=', $matricule->matrcl ],
               ['valider.etatpassman', '=', $StatutAttentepassMan ],
@@ -205,15 +217,37 @@ class PassationActController extends Controller
           ->get();
 
 
+
+        // dd(  $ActivitpassAttente);
+    //       $ActivitpassAttente = DB::table('valider')
+    // ->join('tbldmdpasst', 'valider.idpasst', '=', 'tbldmdpasst.idpasst')
+    // ->join('tblper', 'tblper.matrcl', '=', 'tbldmdpasst.matrcl')
+    // ->join('tblac', 'tblac.code_activite', '=', 'tbldmdpasst.code_activite')
+    // ->join('tbltyac', 'tbltyac.id_type_act', '=', 'tblac.id_type_act')
+    // ->join('travailler_sur', 'travailler_sur.matrcl', '=', 'tbldmdpasst.matrcl')
+    // ->select('valider.idpasst', 'tbldmdpasst.*', 'tblac.code_activite', 'tbltyac.libelle_activite AS type_activity', 'tblper.*', 'travailler_sur.matrcl')
+    // ->distinct()
+    // ->where([
+    //     ['valider.matrclman', '=', $matricule->matrcl],
+    //     ['valider.etatpassman', '=', $StatutAttentepassMan],
+    //     ['etatd', '=', $EtatdmdpassMan],
+    // ])
+    // ->orderBy('tbldmdpasst.datedmd')
+    // ->get();
+
+
+        // dd(  $ActivitpassAttente);
           // les passations qui sont validées par le Manager
 
           $ActivitpassValider = DB::table('valider')
           ->join('tbldmdpasst', 'valider.idpasst', '=', 'tbldmdpasst.idpasst')
           ->join('tblper', 'tblper.matrcl', '=','tbldmdpasst.matrcl')
           ->join('tblac', 'tblac.code_activite', '=','tbldmdpasst.code_activite')
+          ->join('tblfonc', 'tblfonc.code_fonct', '=','tblper.code_fonct')
           ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
           ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
-          ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*','tblper.*','travailler_sur.*')
+          ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*','tblfonc.libelle_fonct','tblper.*','travailler_sur.*')
+          ->distinct()
           ->where([
               ['valider.matrclman', '=', $matricule->matrcl ],
               ['valider.etatpassman', '=', $StatutValpassMan ],
@@ -230,8 +264,10 @@ class PassationActController extends Controller
           ->join('tblper', 'tblper.matrcl', '=','tbldmdpasst.matrcl')
           ->join('tblac', 'tblac.code_activite', '=','tbldmdpasst.code_activite')
           ->join('tbltyac', 'tbltyac.id_type_act', '=','tblac.id_type_act')
+          ->join('tblfonc', 'tblfonc.code_fonct', '=','tblper.code_fonct')
           ->join('travailler_sur', 'travailler_sur.matrcl', '=','tbldmdpasst.matrcl')
-          ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*', 'tblper.*','travailler_sur.*')
+          ->select('valider.*','tbldmdpasst.*', 'tblac.*','tbltyac.*','tblfonc.libelle_fonct', 'tblper.*','travailler_sur.*')
+          ->distinct()
           ->where([
               ['valider.matrclman', '=', $matricule->matrcl ],
               ['valider.etatpassman', '=', $StatutRefpassMan ],
@@ -290,6 +326,7 @@ class PassationActController extends Controller
             $manag = DB::table('tblper')
             ->join('users', 'tblper.eml', '=', 'users.email')
             ->select('tblper.*','users.*')
+            ->distinct()
             ->where([
               ['users.role', '=', $roleManage ],
               ['tblper.etatp', '=', $etatp ],
@@ -308,28 +345,31 @@ class PassationActController extends Controller
           ->get();
 
 
+          $matriculback = DB::table('dtbdesign_bak_mang')->where('matrcl_pers', $matricul->matrcl )->first();
 
+
+        //  dd($matricul->matrcl);
           $activitep = DB::select('select tblper.* ,travailler_sur.* from travailler_sur,tblper where  tblper.etatp=1 and tblper.matrcl = ?', [$matricul->matrcl] );
 
         //  dd($activitep);
+        $attribbackup = DB::table('dtbdesign_bak_mang')
+        ->join('tblper', 'tblper.matrcl', '=', 'dtbdesign_bak_mang.matrcl_pers')
+        ->join('tblman', 'tblman.matrcl', '=', 'dtbdesign_bak_mang.matrcl_man')
+        ->join('tblbackp', 'tblbackp.matrcl', '=', 'dtbdesign_bak_mang.matrcl_back')
+        ->join('tblfonc as fonction_man', 'fonction_man.code_fonct', '=', 'tblman.code_fonct')
+        ->join('tblfonc as fonction_per', 'fonction_per.code_fonct', '=', 'tblper.code_fonct')
+        ->join('tblfonc as fonction_back', 'fonction_back.code_fonct', '=', 'tblbackp.code_fonct')
+        ->select('dtbdesign_bak_mang.*', 'tblper.nam as nompers', 'tblper.renam as renompers',
+                 'tblman.nam as nomana', 'tblman.renam as renomana', 'tblbackp.nam as nomback',
+                 'tblbackp.renam as renomback', 'fonction_per.libelle_fonct as fonction_per_libelle',
+                 'fonction_back.libelle_fonct as fonction_back_libelle' , 'fonction_man.libelle_fonct as fonction_man_libelle')
+                 ->where('dtbdesign_bak_mang.matrcl_pers', $matricul->matrcl )
+        ->distinct()
+        ->get();
 
-        //  $activitep = DB::table('travailler_sur')
-        // ->join('tblper', 'tblper.matrcl', '=', 'travailler_sur.matrcl')
-        // ->select('tblper.*', 'travailler_sur.*')
-        // ->where([
-        //     ['tblper.etatp', '=', $etatp],
-        //     ['tblper.matrcl', '=', $matricul],
-        // ])
-        // ->get();
 
 
-        //   foreach ($activitep as $users) {
-        //     dd($activitep);
-
-        //     }
-
-
-         //dd($activitep);
+        // dd($activitep);
 
         //   foreach ($matriculback as $users) {
         //  dd($users->matrcl);
@@ -340,7 +380,7 @@ class PassationActController extends Controller
         // });
 
 
-            return view('collab.passation.ajoutpassationActivite', compact('matricul', 'backcup', 'manag','activitep'));
+            return view('collab.passation.ajoutpassationActivite', compact('matricul', 'backcup', 'manag','activitep','attribbackup'));
 
           }
 
@@ -366,18 +406,30 @@ class PassationActController extends Controller
         'libellepassation' => 'required|string',
         'descrippasst' => 'required|string',
         'pourcenteff'=> 'required|string',
-        'libproj'=> 'required|string'
+        'libproj'=> 'required|string',
+        'file' => 'required|file|mimes:zip,rar|max:2048'
+
           ]);
 
+          $path = $request->file('file')->store('compressed_files');
+
+
+
+
 // dd($request->libproj);
- $matriculback = DB::select('select * from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+// $matriculback = DB::select('select * from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+
+   // mon matricule utilisateur   ($matricul->matrcl)
+   $matriculback = DB::table('dtbdesign_bak_mang')->where('matrcl_pers', $matricul->matrcl )->first();
 
 
 // $matriculback = DB::table('dtbdesign_bak_mang')->where('matrcl_pers ',[ $matricul->matrcl ])->first() ;
 
 // dd(  $matriculback);
 
- $matriculman = DB::select('select matrcl_man from dtbdesign_bak_mang where matrcl_pers = ?',[ $matricul->matrcl ]);
+
+ $matriculman = DB::table('dtbdesign_bak_mang')->where('matrcl_pers', $matricul->matrcl )->first();
+
 
 
 
@@ -401,14 +453,26 @@ $tblpass = DB::table('tbldmdpasst')->insert([
 'libpasst'=> $request->libellepassation,
 'pourcen_travail_eff'=> $request->pourcenteff,
 'etatd' => 1,  // demande en attente
-'attach' => null,
+'attach' => $path,
 'descption' => $request->descrippasst
 
   ]);
 
-$tbldppasid = DB::select('select idpasst from tbldmdpasst where matrcl = ? and code_activite = ? and libpasst = ? and descption = ?', [ $matricul->matrcl ,$request->activitep , $request->libellepassation , $request->descrippasst]);
-//   $tblpass = DB::table('tbldmdpasst')->insert([
-//dd($tbldppasid );
+
+
+$tbldppasid = DB::table('tbldmdpasst')
+->where('matrcl', $matricul->matrcl )
+->where('code_activite', $request->activitep )
+->where('libpasst', $request->libellepassation )
+->where('descption', $request->descrippasst )
+->where('pourcen_travail_eff', $request->pourcenteff )
+->first();
+
+
+
+
+
+//   $tblpass = DB::table('tbldmdpasst')->insert([dd($tbldppasid );
 //     'matrcl' => $request->matrcl,
 //     'code_activite' => $request->l,
 
@@ -418,29 +482,23 @@ $tbldppasid = DB::select('select idpasst from tbldmdpasst where matrcl = ? and c
 // 'description' => $request->l,
 // 'etatd' => $request ->l ,
 // 'attach' => $request ->
+// dd( $tbldppasid);
 
-$tblpassTblvalid = DB::table('tbldmdpasst')->insert([
 
-    'matrcl_back' => $matricul->matrcl,
-    'idpasst' => $tbldppasid,
-    'matrclman' =>  $matriculman,
+$tblpassTblvalid = DB::table('valider')->insert([
+
+    'matrcl_back' => $matriculback->matrcl_back,
+    'idpasst' => $tbldppasid->idpasst,
+    'matrclman' =>  $matriculman->matrcl_man,
     'idvalid'=> 1,
     'etatpassman'=> 1,
     'etatpassbackup' => 1, // en attente
-    'etatv' => 1,  // validation eest en attente
+    'etatv' => 1 // validation est en attente
 
       ]);
-// dd($matricul);
-// ]);
 
-// $tempscritique = DB::table('tbldmdpasst')->insert([
 
-//     'code_act' => $request->activity,
-//     'lib_crit' => $request->libAct,
-//     'date_deb_crit' => $request->datedeb,
-//     'date_fin_crit' => $request->datefin,
-//     'etatcrip' => 1
-// ]);
+
 
 notyf("Ajout des informations de la passation effectu&eacute; avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
 
@@ -448,7 +506,7 @@ return redirect()->back();
 
           }catch(Exception $exp){
 
-//dd($exp);
+dd($exp);
           }
 
 
@@ -549,7 +607,7 @@ return redirect()->back();
                 // 0 pour refuser la passation backup
                 $RefuspassBack = 0;
 
-                $AccepterMan = DB::update('update valider set etatpassbackup = ? , date_validpassback = now() where valider.idpasst = ?',[$RefuspassBack , $id] );
+                $AccepterMan = DB::update('update valider set date_validpassback = now() , etatpassbackup = ?  where valider.idpasst = ?',[$RefuspassBack , $id] );
 
                 notyf("passation refus&eacute;e avec succes",\Flasher\Prime\Notification\NotificationInterface::INFO);
 

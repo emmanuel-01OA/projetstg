@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\User;
 use App\Http\Requests\AuthRequest;
 use  Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use \Flasher\Prime\Notification\NotificationInterface;
 use Flasher\Prime\FlasherInterface;
-use GrahamCampbell\ResultType\Success;
-use App\Http\Controllers\View;
+
 
 use function Laravel\Prompts\alert;
 
@@ -66,6 +69,17 @@ class AuthController extends Controller
 
 
 
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user || !Hash::check($request->password, $user->password)) {
+
+                    notyf("Identifiant incorrect ou utilisateur inexistant", \Flasher\Prime\Notification\NotificationInterface::ERROR);
+
+            }else{
+
+
+
+            $token = $user->createToken('MyApp')->plainTextToken;
 
        if (Auth::attempt($credentials)) {
                 // Check user role and redirect accordingly
@@ -81,7 +95,7 @@ class AuthController extends Controller
             }
 
 
-
+        }
 
             // if (Auth::attempt($credentials)) {
             //     // Check user role and redirect accordingly
@@ -107,19 +121,41 @@ class AuthController extends Controller
 
                }
 
+
+
+        }
+
+
+        public function listTokens(Request $request)
+        {
+            return response()->json($request->user()->tokens);
+        }
+
+
+        public function revokeToken(Request $request, $tokenId)
+        {
+            $token = $request->user()->tokens()->find($tokenId);
+            if ($token) {
+                $token->delete();
+             //   return response()->json(['message' => 'Token révoqué avec succès']);
+            }
+
+           // return response()->json(['message' => 'Token non trouvé'], 404);
         }
 
 
 
-
-
-    public function logout()
+    public function logout(Request $request)
         {
             Auth::logout();
 
-           notyf("deconnexion avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
-            return redirect()->route('login');
+        //    notyf("deconnexion avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+        //     return redirect()->route('login');
 
+       // $request->user()->currentAccessToken()->delete();
+        notyf("deconnexion avec succes",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
+
+        return redirect()->route('logout');
         }
 
 

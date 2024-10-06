@@ -49,7 +49,11 @@
               <div>
                 <label for="email" class="tw-block tw-text-sm tw-font-medium tw-leading-6 tw-text-gray-900">Email : </label>
                 <div class="tw-mt-2">
-                  <input id="email" type="email" name="email"  autocomplete="email" required class="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 focus:tw-ring-2 focus:tw-ring-inset focus:tw-ring-red-600 sm:tw-text-sm sm:tw-leading-6">
+                  <input id="email" type="email" name="email" value="{{ old('email') }}" autocomplete="email" required class="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 focus:tw-ring-2 focus:tw-ring-inset focus:tw-ring-red-600 sm:tw-text-sm sm:tw-leading-6">
+                  @error('email')
+
+                  {{ $message }}
+                  @enderror
                 </div>
               </div>
 
@@ -62,6 +66,13 @@
                 </div>
                 <div class="tw-mt-2">
                   <input id="password" name="password" type="password" autocomplete="current-password" class="tw-block tw-w-full tw-rounded-md tw-border-0 tw-py-1.5 tw-text-gray-900 tw-shadow-sm tw-ring-1 tw-ring-inset tw-ring-gray-300 placeholder:tw-text-gray-400 focus:tw-ring-2 focus:tw-ring-inset focus:tw-ring-red-600 sm:tw-text-sm sm:tw-leading-6">
+
+                  @error('password')
+
+                  {{ $message }}
+                  @enderror
+
+
                 </div>
               </div>
 
@@ -82,7 +93,53 @@
 
 
 
+<script>
 
+async function login(email, password) {
+    const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        // Stocker le token avec un identifiant unique (par exemple, horodatage)
+        localStorage.setItem(`token_${Date.now()}`, data.token);
+    } else {
+        // Gérer l'erreur de connexion
+        console.error('Échec de la connexion');
+    }
+}
+
+// Fonction pour faire une requête API avec le token sélectionné
+async function fetchProtectedData(selectedToken) {
+    const response = await fetch('/api/protected-route', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${selectedToken}`,
+        },
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+    } else {
+        console.error('Échec de la requête');
+    }
+}
+
+
+// Exemple de fonction pour lister les tokens stockés
+function listStoredTokens() {
+    const tokens = Object.keys(localStorage).filter(key => key.startsWith('token_'));
+    return tokens.map(key => localStorage.getItem(key));
+}
+
+
+</script>
 
 
 

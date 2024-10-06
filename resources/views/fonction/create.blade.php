@@ -80,7 +80,7 @@
                 <div class="col-auto tw-mx-auto">
 
 
-                    <button type="submit" class="tw-text-white tw-bg-red-700 hover:tw-bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">enregistrer</button>
+                    <button type="submit" class="tw-text-white tw-bg-red-700 hover:tw-bg-red-800 focus:tw-ring-4 focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-me-2 tw-mb-2 dark:tw-bg-red-600 dark:hover:tw-bg-red-600 focus:tw-outline-none dark:focus:tw-ring-red-800">Enregistrer</button>
                 </div>
 
 
