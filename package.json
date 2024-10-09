@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "chart.js": "^4.4.4",
+        "dhtmlx-gantt": "^8.0.10",
         "jquery": "^3.7.1"
     }
 }

@@ -4,8 +4,7 @@
         <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
         <div class="app-branding">
             <a class="app-logo" href="{{ route('dashboardman') }}"><img class="logo"
-                    src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"><span
-                    class="logo-text">SGABS</span></a>
+                    src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"></img></a>
 
         </div><!--//app-branding-->
 

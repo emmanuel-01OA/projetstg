@@ -18,6 +18,10 @@
     @vite('resources/js/app.js')
     <script src="{{ mix('js/app.js') }}" defer></script>
 
+    <script src="{{ asset('assets/js/dhtmlgantt.js') }}"></script>
+
+    <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/dhtml.css') }}">
+
     <script src="{{ asset('assets/js/chartJS.js') }}"></script>
 
     <!-- FontAwesome JS-->
@@ -35,6 +39,19 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #gantt_here {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
 </head>
 

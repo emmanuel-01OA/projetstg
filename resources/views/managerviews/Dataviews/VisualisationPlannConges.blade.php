@@ -28,83 +28,73 @@
 </nav>
 
 
-{{--
+
 <div class="tab-content" id="orders-table-tab-content">
 
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 
 
         {{-- affichage Data --}}
-    {{-- <div class="tw-w-full tw-p-4 tw-text-center tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow sm:tw-p-8 dark:tw-bg-gray-800 dark:tw-border-gray-700">
+    <div class="tw-w-full tw-p-4 tw-text-center tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow sm:tw-p-8 dark:tw-bg-gray-800 dark:tw-border-gray-700">
 
 
-      <div class="tw-items-center tw-justify-center tw-space-y-4 sm:tw-flex sm:tw-space-y-0 sm:tw-space-x-4 rtl:tw-space-x-reverse"> --}}
-{{--
-        <form method="GET" action="">
-            <input type="text" class="tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg" name="employee_name" placeholder="Nom" required>
-            <input type="date" class="tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg" name="date" required>
-            <button type="submit">Filtre</button>
+      <div class="tw-items-center tw-justify-center tw-space-y-4 sm:tw-flex sm:tw-space-y-0 sm:tw-space-x-4 rtl:tw-space-x-reverse">
+
+        {{-- <form method="GET" action="{{ route('tasks.index') }}">
+            <select name="assigned_to">
+                <option value="">Tous</option>
+                <option value="Responsable A">Responsable A</option>
+                <option value="Responsable B">Responsable B</option>
+                <!-- Ajouter d'autres responsables -->
+            </select>
+            <button type="submit">Filtrer</button>
         </form> --}}
-{{--
+
+
         <div class="container">
             <h1>Visualisation des planifications de Congés </h1>
-            <canvas id="ganttChart"  width="400" height="400"></canvas>
-        </div> --}}
-
-        {{-- <form method="GET" action="">
-            <input type="text" name="employee_name" placeholder="Nom employer" required>
-            <input type="date" name="date" required>
-            <button type="submit">Filtre</button>
-        </form> --}}
-
-
+            {{-- <canvas id="ganttChart"  width="400" height="400"></canvas> --}}
+            <div id="gantt_here" style="width:100%; height:500px;"></div>
+            {{-- <canvas id="myChart"></canvas> --}}
+        </div>
 
 
         {{-- <script>
-            const ctx = document.getElementById('ganttChart').getContext('2d');
+            // Récupération des données des congés
+            // const tasks = @json($tasks);
 
-            const leaves = @json($leaves);
-            const labels = leaves.map(leave => leave.employee_name);
-            const startDates = leaves.map(leave => new Date(planifier.date_depart).getTime());
-            const endDates = leaves.map(leave => new Date(planifier.date_arrive).getTime());
-            const durations = endDates.map((endDate, index) => (endDate - startDates[index]) / (1000 * 60 * 60 * 24));
+            // const labels = tasks.map(leave => leave.renam);
+            // const startDates = tasks.map(leave => new Date(task.date_depart.getTime()));
+            // const endDates = tasks.map(leave => new Date(task.date_arrive).getTime());
+            // const durations = endDates.map((endDate, index) => endDate - startDates[index]);
 
-            const data = {
-                labels: labels,datasets: [{
-                    label: 'Duree conge',
-                    data: durations,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    barPercentage: 0.5,
-                    categoryPercentage: 1.0,
-                }]
-            };
-
-            const config = {
-                type: 'bar',
-                data: data,
-                options: {
-                    scales: {
-                        y: {
-                            stacked: true,
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Duree des cconges (Days)',
-                            }
-                        }
-                    }
-                }
-            };
-
-            const ganttChart = new Chart(ctx, config);
-        </script>
-
+            // const ctx = document.getElementById('myChart').getContext('2d');
+            // const myChart = new Chart(ctx, {
+            //     type: 'bar',
+            //     data: {
+            //         labels: labels,
+            //         datasets: [{
+            //             label: 'Durée des Congés',
+            //             data: durations,
+            //             backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            //         }],
+            //     },
+            //     options: {
+            //         scales: {
+            //             y: {
+            //                 beginAtZero: true,
+            //                 title: {
+            //                     display: true,
+            //                     text: 'Durée (ms)'
+            //                 }
+            //             }
+            //         }
+            //     }
+            // });
+        </script> --}}
 
     </div>
-</div> --}}
+</div>
 
 {{-- fin affichage data --}}
 
@@ -169,16 +159,58 @@
             });
 
 
+
+        gantt.init("gantt_here");
+        gantt.parse({
+            data: @json($tasks)
+        });
+
+
+
+
+            //    const tasks = @json($tasks);
+
+            // const labels = tasks.map(task => tasks.renam);
+            // const startDates = tasks.map(task => new Date(tasks.date_depart));
+            // const endDates = tasks.map(task => new Date(tasks.date_arrive));
+            // const durations = endDates.map((endDate, index) => endDate - startDates[index]);
+
+            // const ctxv = document.getElementById('myChart').getContext('2d');
+            // const myChart = new Chart(ctxv, {
+            //     type: 'bar',
+            //     data: {
+            //         labels: labels,
+            //         datasets: [{
+            //             label: 'Durée des Congés',
+            //             data: durations,
+            //             backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            //         }],
+            //     },
+            //     options: {
+            //         scales: {
+            //             y: {
+            //                 beginAtZero: true,
+            //                 title: {
+            //                     display: true,
+            //                     text: 'Durée (ms)'
+            //                 }
+            //             }
+            //         }
+            //     }
+            // });
+
             </script>
 
 
 
 
 
-{{--  --}}
+
 
             </div>
+
         </div>
+
 
 
 

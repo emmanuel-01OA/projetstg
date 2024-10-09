@@ -5,7 +5,8 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href="{{ route('dashboard') }}"><img class="logo-icon" src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"></a>
+		            <a class="app-logo" href="{{ route('dashboard') }}"><img class="logo"
+                        src="{{ asset('assets/images/logo-sgabs.png') }}" alt="logo"></a>
 
 		        </div><!--//app-branding-->
 

@@ -7,7 +7,7 @@
 
 <div class="row g-3 mb-4 align-items-center justify-content-between">
     <div class="col-auto">
-        <h1 class="app-page-title mb-0">Planification Cong&eacute;s personnels du 31/01/23 au 31/01/24</h1>
+        <h1 class="app-page-title mb-0">Planification Cong&eacute;s personnels du 01/01/24 au 31/01/25</h1>
     </div>
     <div class="col-auto">
          <div class="page-utilities">

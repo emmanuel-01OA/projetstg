@@ -29,6 +29,12 @@
 
     <script src="{{ asset('assets/js/chartJS.js') }}"></script>
 
+    <script src="{{ asset('assets/js/dhtmlgantt.js') }}"></script>
+
+
+
+    <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/dhtml.css') }}">
+
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">

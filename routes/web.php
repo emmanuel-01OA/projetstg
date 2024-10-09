@@ -338,6 +338,10 @@ Route::prefix('conges/VisualisationConges')->group(function () {
 
     Route::get('/conges', [DataCongesController::class, 'Fitre'])->name('VisualisationConges2.index');
 
+    Route::get('/tasks', [DataCongesController::class, 'indexFiltre'])->name('tasks.index');
+
+    Route::get('/gantt', [DataCongesController::class, 'index'])->name('tasks.index');
+
 });
 
 Route::prefix('activite/VisualisationActivites')->group(function () {

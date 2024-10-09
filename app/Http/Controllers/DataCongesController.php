@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Planifier;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -108,12 +109,28 @@ class DataCongesController extends Controller
         //                    ->get();
         // }
 
+        $tasks = DB::table('planifier') ->join('tblper', 'tblper.matrcl','=','planifier.matrcl')
+        ->select('*')
+        ->where([
+            ['planifier.etatvalidpl', '=', $matrcletat ],
+
+        ]) ->get();
+
+//     dd($tasks);
+
+
         return view("managerviews.Dataviews.VisualisationPlannConges", compact('months', 'counts', 'tasks'));
     }
 
 
+    // public function indexFiltre(Request $request ){
+
+    //     $projects = [
+    //         ['name' => 'Projet A', 'start' => '2024-01-01', 'end' => '2024-01-15'],
+    //         ['name' => 'Projet B', 'start' => '2024-01-10', 'end' => '2024-01-20'],
+    //     ];
 
 
-
+    // }
 
 }

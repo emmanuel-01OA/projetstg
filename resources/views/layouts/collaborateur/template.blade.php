@@ -19,6 +19,13 @@
     <script src="{{ asset('assets/js/chartJS.js') }}"></script>
 
 
+
+
+    <script src="{{ asset('assets/js/dhtmlgantt.js') }}"></script>
+
+
+    <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/dhtml.css') }}">
+
     <!-- FontAwesome JS-->
     <script defer src="{{ asset('assets/plugins/fontawesome/js/all.min.js') }}"></script>
 
@@ -33,6 +40,20 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+
+
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #gantt_here {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 
 </head>
 

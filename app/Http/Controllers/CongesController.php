@@ -22,12 +22,12 @@ class CongesController extends Controller
     //
 
     private function calculateLeaveDays($start_date, $end_date)
-{
+ {
     $start = \Carbon\Carbon::parse($start_date);
     $end = \Carbon\Carbon::parse($end_date);
 
     return $end->diffInDays($start) + 1; // Inclut le jour de début
-}
+ }
 
 
     public function planifcongescreate(Request $Request){
@@ -76,7 +76,9 @@ class CongesController extends Controller
 
           $backupconges = DB::table('planifier')->where('planifier.matrcl', $matriculback->matrcl_back )->where('planifier.etatf', 2)->first();
 
-          dd( $backupconges );
+
+
+        //  dd( $backupconges );
            $Mnconges = DB::table('planifier')->where('planifier.matrcl', $matriculback->matrcl_pers )
            ->where('planifier.etatf', 2)->first();
 
@@ -106,7 +108,7 @@ class CongesController extends Controller
                      if(Carbon::parse($Request->datedc)->between($tbcritique->date_deb_crit, $tbcritique->date_fin_crit)){
                    if($datedb->between($dateDebutcritq,$dateFincritq) ){
 
-                    //    dd($travailler_sur->code_activite);
+                    //   dd($travailler_sur->code_activite);
 
                          $usercritique = true;
                          break 2;
@@ -116,32 +118,33 @@ class CongesController extends Controller
                 }
              }
         }
-      }
+    }
 
 
+    //  dd($backupconges);
 
               $userconge = false;
-              foreach( $backupconges  as  $backupconge ){
+            //   foreach( $backupconges  as  $backupconge ){
 
-                            foreach( $Mnconges  as  $Mconge ){
-
-
-               if(Carbon::parse($Request->datedc)->between($Mnconges->date_depart, $Mnconges->date_arrive )){
-                    if($datedb->between($backupconges ,$backupconges ) ){
-
-                    //    dd($travailler_sur->code_activite);
-
-                         $userconge = true;
-                         break 2;
-
-                            }
-
-                     }
+            //                 foreach( $Mnconges  as  $Mconge ){
 
 
+            //    if(Carbon::parse($Request->datedc)->between($Mnconges->date_depart, $Mnconges->date_arrive )){
+            //         if($datedb->between($backupconge->date_depart ,$backupconge->date_arrive ) ){
 
-              }
-            }
+            //         //    dd($travailler_sur->code_activite);
+
+            //              $userconge = true;
+            //              break 2;
+
+            //                 }
+
+            //          }
+
+
+
+            //   }
+            // }
 
 
 
@@ -176,6 +179,7 @@ class CongesController extends Controller
 
               }
 
+
               if ($Request->datedc >$Request->datedc ) {
 
 
@@ -197,6 +201,8 @@ class CongesController extends Controller
                     'date_arrive' => $Request->input('datefc'),
                 ]);
 
+
+
                 notyf("Planification cong&eacute; enregistr&eacute; avec success",\Flasher\Prime\Notification\NotificationInterface::SUCCESS);
 
                 return redirect()->route('mescongesuser.create');
@@ -212,7 +218,9 @@ class CongesController extends Controller
 
         }
         catch (Exception $e) {
-            sweetalert('Vous n avez pas de solde congés');
+
+          //  dd($e);
+           // sweetalert('Vous n avez pas de solde congés');
 
         }
 
@@ -228,6 +236,8 @@ class CongesController extends Controller
 
 
 }
+
+
 
 
 
